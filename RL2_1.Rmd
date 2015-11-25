@@ -9,31 +9,24 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_1
 setwd("C:/NTUTrainRL2")
 Sys.setlocale(category = "LC_ALL", locale = "cht")
 accidentList <- readRDS('data/accidentList.rds')
+colnames(accidentList) <- c("縣市別", "醫院別", "性別", "國籍別", "年齡", "醫療檢傷", "救護檢傷")
 ```
 
-### bar plot
+### 長條圖bar plot
 
-
+以圖形高度代表資料量的統計圖形，主要用來處理離散型資料。
 
 ```{r}
 par(mfrow=c(3,2))
-barplot(table(accidentList$county), main="依縣市別", ylab="人數")
-barplot(table(accidentList$hospital), main="依醫院別", ylab="人數", las=2)
-barplot(table(accidentList$gender), main="依性別", ylab="人數")
-barplot(table(accidentList$nationality), main="依國籍", ylab="人數")
-barplot(table(accidentList$woundType1), main="依醫療檢傷", ylab="人數")
-barplot(table(accidentList$woundType2), main="依救護檢傷", ylab="人數")
-
 barPlots <- function(){
-  titles <- c("依縣市別", "依性別", "依國籍", "依醫療檢傷", "依救護檢傷")
-  variables <- colnames(accidentList[, c(-2, -5)])
-  index <- 1
-  for (index in length(variables)){
-    barplot(table(accidentList$variables[index]), main=titles[index], ylab="人數")
+  #titles <- c("依縣市別", "依性別", "依國籍", "依醫療檢傷", "依救護檢傷")
+  variables <- names(accidentList[, c(-2, -5)])
+  for (name in variables){
+    barplot(table(accidentList[ ,name]), main=paste("依",name), ylab="人數")
   }
 }
 barPlots()
-
+barplot(table(accidentList$醫院別), main="依醫院別", ylab="人數", las=2)
 ```
 
 ## Reference
