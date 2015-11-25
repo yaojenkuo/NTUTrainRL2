@@ -29,6 +29,17 @@ barPlots()
 barplot(table(accidentList$醫院別), main="依醫院別", ylab="人數", las=2)
 ```
 
+### 直方圖histogram
+
+觀察連續型資料的分布。
+
+```{r}
+par(mfrow=c(1,1))
+hist(na.omit(accidentList$年齡), xlab="年齡", main="依年齡", breaks=15, freq=FALSE)
+rug(jitter(accidentList$年齡))
+lines(density(accidentList$年齡, na.rm=TRUE), col="blue", lwd=2)
+```
+
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook
