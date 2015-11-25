@@ -1,5 +1,5 @@
 # NTUTrainRL2
-This is the lecture notes for NTU Train Course of R Project
+This is the lecture notes for NTU Train Course of R Project Lecture 2
 
 ## R Basic Plotting System
 

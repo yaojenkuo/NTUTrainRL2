@@ -1,0 +1,12 @@
+# NTUTrainRL2_1
+This is the lecture notes for NTU Train Course of R Project Lecture 2_1
+
+## R Basic Plotting System
+
+
+
+## Reference
+* R in Action, Robert I. Kabacoff
+* R Graphics Cookbook
+
+&copy; Tony Yao-Jen Kuo 2015
