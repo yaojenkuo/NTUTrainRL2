@@ -10,6 +10,8 @@ setwd("C:/NTUTrainRL2")
 Sys.setlocale(category = "LC_ALL", locale = "cht")
 accidentList <- readRDS('data/accidentList.rds')
 colnames(accidentList) <- c("縣市別", "醫院別", "性別", "國籍別", "年齡", "醫療檢傷", "救護檢傷")
+summary(accidentList)
+accidentList <- accidentList[accidentList$年齡!=101,]
 ```
 
 ### 長條圖bar plot
@@ -35,9 +37,19 @@ barplot(table(accidentList$醫院別), main="依醫院別", ylab="人數", las=2
 
 ```{r}
 par(mfrow=c(1,1))
-hist(na.omit(accidentList$年齡), xlab="年齡", main="依年齡", breaks=15, freq=FALSE)
-rug(jitter(accidentList$年齡))
-lines(density(accidentList$年齡, na.rm=TRUE), col="blue", lwd=2)
+hist(na.omit(accidentList$年齡), xlab="年齡", ylab="密度",  main="依年齡", breaks=15, freq=FALSE, ylim=c(0, 0.12), col="skyblue")
+rug(jitter(accidentList$年齡))#在X軸上顯示資料密度
+lines(density(accidentList$年齡, na.rm=TRUE), col="red", lwd=2)#hist的freq要設為false才看得到
+```
+
+### 盒鬚圖boxplot
+
+```{r}
+boxplot(年齡 ~ 縣市別, data = accidentList, main='年齡依縣市別')
+boxplot(年齡 ~ 性別, data = accidentList, main='年齡依性別')
+boxplot(年齡 ~ 國籍別, data = accidentList, main='年齡依國籍別')
+boxplot(年齡 ~ 醫療檢傷, data = accidentList, main='年齡依醫療檢傷')
+boxplot(年齡 ~ 救護檢傷, data = accidentList, main='年齡依救護檢傷')
 ```
 
 ## Reference
