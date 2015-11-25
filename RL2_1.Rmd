@@ -3,7 +3,38 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_1
 
 ## R Basic Plotting System
 
+### 資料載入
 
+```{r}
+setwd("C:/NTUTrainRL2")
+Sys.setlocale(category = "LC_ALL", locale = "cht")
+accidentList <- readRDS('data/accidentList.rds')
+```
+
+### bar plot
+
+
+
+```{r}
+par(mfrow=c(3,2))
+barplot(table(accidentList$county), main="依縣市別", ylab="人數")
+barplot(table(accidentList$hospital), main="依醫院別", ylab="人數", las=2)
+barplot(table(accidentList$gender), main="依性別", ylab="人數")
+barplot(table(accidentList$nationality), main="依國籍", ylab="人數")
+barplot(table(accidentList$woundType1), main="依醫療檢傷", ylab="人數")
+barplot(table(accidentList$woundType2), main="依救護檢傷", ylab="人數")
+
+barPlots <- function(){
+  titles <- c("依縣市別", "依性別", "依國籍", "依醫療檢傷", "依救護檢傷")
+  variables <- colnames(accidentList[, c(-2, -5)])
+  index <- 1
+  for (index in length(variables)){
+    barplot(table(accidentList$variables[index]), main=titles[index], ylab="人數")
+  }
+}
+barPlots()
+
+```
 
 ## Reference
 * R in Action, Robert I. Kabacoff
