@@ -1,7 +1,7 @@
 # NTUTrainRL2
 This is the lecture notes for NTU Train Course of R Project Lecture 2
 
-## R Basic Plotting System
+## R Base Plotting System
 
 https://github.com/yaojenkuo/NTUTrainRL2/blob/master/RL2_1.Rmd
 

@@ -1,7 +1,9 @@
 # NTUTrainRL2_1
 This is the lecture notes for NTU Train Course of R Project Lecture 2_1
 
-## R Basic Plotting System
+## R Base Plotting System
+
+不需要額外安裝套件就可以畫圖。
 
 ### 資料載入
 
@@ -56,6 +58,10 @@ boxPlots <- function(){
 boxPlots()
 ```
 
+### 點圖dot plot
+
+單純的散佈圖形。
+
 ### 散佈圖scatter plot
 
 * 將可能相關的兩組連續型變數畫在坐標圖上，檢驗成對的資料之間是否有相關性
@@ -67,6 +73,8 @@ boxPlots()
 ```
 
 ### 線圖line graph
+
+### 圓餅pie chart
 
 ## Reference
 * R in Action, Robert I. Kabacoff
