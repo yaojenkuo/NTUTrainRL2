@@ -11,7 +11,7 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_1
 setwd("C:/NTUTrainRL2")
 Sys.setlocale(category = "LC_ALL", locale = "cht")
 accidentList <- readRDS('data/accidentList.rds')
-colnames(accidentList) <- c("縣市別", "醫院別", "性別", "國籍別", "年齡", "醫療檢傷", "救護檢傷")
+colnames(accidentList) <- c("醫院所在縣市別", "醫院別", "性別", "國籍別", "年齡", "醫療檢傷", "救護檢傷")
 summary(accidentList)
 accidentList <- accidentList[accidentList$年齡!=101,]
 ```
@@ -62,6 +62,11 @@ boxPlots()
 
 單純的散佈圖形。
 
+```{r}
+accidentListKaohsiung <- accidentList[accidentList$醫院所在縣市別=='高雄市',]
+dotchart(accidentListKaohsiung$年齡,labels=row.names(accidentListKaohsiung),cex=.7)
+```
+
 ### 散佈圖scatter plot
 
 * 將可能相關的兩組連續型變數畫在坐標圖上，檢驗成對的資料之間是否有相關性
@@ -74,7 +79,17 @@ boxPlots()
 
 ### 線圖line graph
 
+```{r}
+
+```
+
 ### 圓餅pie chart
+
+身為朋友，朋友不應該告訴朋友要畫圓餅圖。
+
+```{r}
+
+```
 
 ## Reference
 * R in Action, Robert I. Kabacoff
