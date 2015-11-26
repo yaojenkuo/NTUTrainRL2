@@ -21,7 +21,6 @@ accidentList <- accidentList[accidentList$年齡!=101,]
 ```{r}
 par(mfrow=c(3,2))
 barPlots <- function(){
-  #titles <- c("依縣市別", "依性別", "依國籍", "依醫療檢傷", "依救護檢傷")
   variables <- names(accidentList[, c(-2, -5)])
   for (name in variables){
     barplot(table(accidentList[ ,name]), main=paste("依",name), ylab="人數")
@@ -44,13 +43,22 @@ lines(density(accidentList$年齡, na.rm=TRUE), col="red", lwd=2)#hist的freq要
 
 ### 盒鬚圖boxplot
 
+顯示數據分布情況包含最大值、最小值、中位數、下四分位數及上四分位數。
+
 ```{r}
-boxplot(年齡 ~ 縣市別, data = accidentList, main='年齡依縣市別')
-boxplot(年齡 ~ 性別, data = accidentList, main='年齡依性別')
-boxplot(年齡 ~ 國籍別, data = accidentList, main='年齡依國籍別')
-boxplot(年齡 ~ 醫療檢傷, data = accidentList, main='年齡依醫療檢傷')
-boxplot(年齡 ~ 救護檢傷, data = accidentList, main='年齡依救護檢傷')
+par(mfrow=c(3,2))
+boxPlots <- function(){
+  variables <- names(accidentList[, c(-2, -5)])
+  for (name in variables){
+    boxplot(年齡 ~ accidentList[ ,name], data=accidentList, main=paste('年齡依',name))
+  }
+}
+boxPlots()
 ```
+
+### 散佈圖scatter plot
+
+### 線圖line graph
 
 ## Reference
 * R in Action, Robert I. Kabacoff
