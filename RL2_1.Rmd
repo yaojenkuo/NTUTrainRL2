@@ -12,8 +12,8 @@ setwd("C:/NTUTrainRL2")
 Sys.setlocale(category = "LC_ALL", locale = "cht")
 accidentList <- readRDS('data/accidentList.rds')
 colnames(accidentList) <- c("醫院所在縣市別", "醫院別", "性別", "國籍別", "年齡", "醫療檢傷", "救護檢傷")
-summary(accidentList)
-accidentList <- accidentList[accidentList$年齡!=101,]
+summary(accidentList)#看到一筆101歲的極端值，好像不太對
+accidentListNew <- subset(accidentList, 年齡!=101 | is.na(年齡))#使用一下subset()函數!
 ```
 
 ### 長條圖bar plot
@@ -23,13 +23,13 @@ accidentList <- accidentList[accidentList$年齡!=101,]
 ```{r}
 par(mfrow=c(3,2))
 barPlots <- function(){
-  variables <- names(accidentList[, c(-2, -5)])
+  variables <- names(accidentListNew[, c(-2, -5)])
   for (name in variables){
-    barplot(table(accidentList[ ,name]), main=paste("依",name), ylab="人數")
+    barplot(table(accidentListNew[ ,name]), main=paste("依",name), ylab="人數")
   }
 }
 barPlots()
-barplot(table(accidentList$醫院別), main="依醫院別", ylab="人數", las=2)
+barplot(table(accidentListNew$醫院別), main="依醫院別", ylab="人數", las=2)
 ```
 
 ### 直方圖histogram
@@ -38,9 +38,9 @@ barplot(table(accidentList$醫院別), main="依醫院別", ylab="人數", las=2
 
 ```{r}
 par(mfrow=c(1,1))
-hist(na.omit(accidentList$年齡), xlab="年齡", ylab="密度",  main="依年齡", breaks=15, freq=FALSE, ylim=c(0, 0.12), col="skyblue")
-rug(jitter(accidentList$年齡))#在X軸上顯示資料密度
-lines(density(accidentList$年齡, na.rm=TRUE), col="red", lwd=2)#hist的freq要設為false才看得到
+hist(na.omit(accidentListNew$年齡), xlab="年齡", ylab="密度",  main="依年齡", breaks=15, freq=FALSE, ylim=c(0, 0.12), col="skyblue")
+rug(jitter(accidentListNew$年齡))#在X軸上顯示資料密度
+lines(density(accidentListNew$年齡, na.rm=TRUE), col="red", lwd=2)#hist的freq要設為false才看得到
 ```
 
 ### 盒鬚圖boxplot
@@ -50,9 +50,9 @@ lines(density(accidentList$年齡, na.rm=TRUE), col="red", lwd=2)#hist的freq要
 ```{r}
 par(mfrow=c(3,2))
 boxPlots <- function(){
-  variables <- names(accidentList[, c(-2, -5)])
+  variables <- names(accidentListNew[, c(-2, -5)])
   for (name in variables){
-    boxplot(年齡 ~ accidentList[ ,name], data=accidentList, main=paste('年齡依',name))
+    boxplot(年齡 ~ accidentListNew[ ,name], data=accidentListNew, main=paste('年齡依',name))
   }
 }
 boxPlots()
@@ -63,8 +63,24 @@ boxPlots()
 單純的散佈圖形。
 
 ```{r}
-accidentListKaohsiung <- accidentList[accidentList$醫院所在縣市別=='高雄市',]
-dotchart(accidentListKaohsiung$年齡,labels=row.names(accidentListKaohsiung),cex=.7)
+par(mfrow=c(1,1))
+accidentListShort <- accidentListNew[accidentListNew$醫院所在縣市別=='桃園市' & !is.na(accidentListNew$年齡), ]
+accidentListShortOrder <- accidentListShort[order(accidentListShort$年齡), ]
+dotchart(accidentListShortOrder$年齡,labels=row.names(accidentListShortOrder),cex=.7, main="點圖依年齡", xlab="年齡")
+```
+
+### 圓餅pie chart
+
+朋友不應該告訴朋友要畫圓餅圖。
+
+```{r}
+slices <- as.vector(table(accidentListNew$醫療檢傷))#把table轉為向量
+labels <- paste(names(table(accidentListNew$醫療檢傷)), "\n", slices, "人", sep="")#table就是有名字的向量
+pie(slices, labels = labels, main="醫療檢傷人數")
+
+percentage <- round(slices/sum(slices)*100)
+labels2 <- paste(names(table(accidentListNew$醫療檢傷)), "\n", percentage, "%", sep="")
+pie(slices, labels=labels2, col=rainbow(length(labels2)), main="醫療檢傷比例")
 ```
 
 ### 散佈圖scatter plot
@@ -78,14 +94,6 @@ dotchart(accidentListKaohsiung$年齡,labels=row.names(accidentListKaohsiung),ce
 ```
 
 ### 線圖line graph
-
-```{r}
-
-```
-
-### 圓餅pie chart
-
-身為朋友，朋友不應該告訴朋友要畫圓餅圖。
 
 ```{r}
 
