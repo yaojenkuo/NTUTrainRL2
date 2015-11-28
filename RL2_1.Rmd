@@ -71,7 +71,7 @@ dotchart(accidentListShortOrder$年齡,labels=row.names(accidentListShortOrder),
 
 ### 圓餅pie chart
 
-朋友不應該告訴朋友要畫圓餅圖。
+圓餅圖是呈現組成比例的圖形。
 
 ```{r}
 slices <- as.vector(table(accidentListNew$醫療檢傷))#把table轉為向量
@@ -87,7 +87,7 @@ pie(slices, labels=labels2, col=rainbow(length(labels2)), main="醫療檢傷比�
 
 * 將可能相關的兩組連續型變數畫在坐標圖上，檢驗成對的資料之間是否有相關性
 
-* 前面例子使用的八仙傷亡名單資料集中只有一個連續型變數:年齡，無法示範散佈圖，所以我們要使用另外一個資料集。
+* 前面例子使用的八仙傷亡名單資料集中只有一個連續型變數:年齡，無法示範散佈圖，所以我們要使用另外一個資料集
 
 ```{r}
 
@@ -95,8 +95,16 @@ pie(slices, labels=labels2, col=rainbow(length(labels2)), main="醫療檢傷比�
 
 ### 線圖line graph
 
-```{r}
+* 線圖其實就是散佈圖的延伸(plot+lines)
 
+```{r}
+year <- c(1996, 1997,	1998,	1999,	2000,	2001,	2002,	2003,	2004,	2005,	2006,	2007,	2008,	2009,	2010,	2011,	2012,	2013,	2014)
+salaryReal <- c(42520, 44195, 44798, 46040, 46605, 46716, 46330, 47058, 46989, 46447, 46521, 46650, 45038, 43193, 44989, 45508, 44726, 44446, 45494)
+plot(year, salaryReal, type="l", main=paste(" 歷年工業及服務業受僱員工以100年價格衡量之實質薪資"), sub=paste("資料來源: 行政院主計總處","\n","https://www.dgbas.gov.tw/public/Attachment/5225164112198I9Y1K.pdf"),  lwd=1, xlab="", ylab="")
+points(year[1:4], salaryReal[1:4], col="blue", bg="blue", pch=15)
+points(year[5:12], salaryReal[5:12], col="darkgreen", bg="darkgreen", pch=16)
+points(year[13:length(year)], salaryReal[13:length(salaryReal)], col="blue", bg="blue", pch=17)
+legend("bottomright", pch=c(15, 16, 17), col=c("blue", "darkgreen", "blue"), c("李登輝", "陳水扁", "馬英九"), bty="o",  box.col="black", cex=.8)
 ```
 
 ## Reference
