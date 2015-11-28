@@ -71,7 +71,11 @@ dotchart(accidentListShortOrder$年齡,labels=row.names(accidentListShortOrder),
 
 ### 圓餅pie chart
 
+<<<<<<< HEAD
 圓餅圖是呈現組成比例的圖形。
+=======
+圓餅圖是一種呈現比例的圖形。
+>>>>>>> 024769b6240765e96b58be9adffe6bc7a8c75881
 
 ```{r}
 slices <- as.vector(table(accidentListNew$醫療檢傷))#把table轉為向量
@@ -90,7 +94,7 @@ pie(slices, labels=labels2, col=rainbow(length(labels2)), main="醫療檢傷比�
 * 前面例子使用的八仙傷亡名單資料集中只有一個連續型變數:年齡，無法示範散佈圖，所以我們要使用另外一個資料集
 
 ```{r}
-
+ 
 ```
 
 ### 線圖line graph
