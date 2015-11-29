@@ -94,7 +94,13 @@ pie(slices, labels=labels2, col=rainbow(length(labels2)), main="醫療檢傷比�
 * 前面例子使用的八仙傷亡名單資料集中只有一個連續型變數:年齡，無法示範散佈圖，所以我們要使用另外一個資料集
 
 ```{r}
- 
+#From 1999 to 2009, US Dept. of Energy and Centers of Disease Control & Prevention
+usCrudeOilFromNorway <- c(96, 110, 103, 127, 60, 54, 43, 36, 20, 11, 22)
+driverKilledInCollisionWithRailwayTrain <- c(76, 74, 76, 87, 66, 59, 63, 60, 55, 52, 46)
+plot(usCrudeOilFromNorway, driverKilledInCollisionWithRailwayTrain, main="Oil Import vs. Railway Kills", xlab="US Crude Oil Imported From Norway(in million barrels per year)", ylab="Driver Killed in Collision With Railway Train(in people per year)", pch=18, col="darkgreen", bg="darkgreen")
+abline(lm(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway), col="red", lwd=2) #add regression line
+correlation <- round(cor(usCrudeOilFromNorway, driverKilledInCollisionWithRailwayTrain), 4)*100
+text(85, 65, paste("Correlation: ",correlation, "%", sep=""))
 ```
 
 ### 線圖line graph
