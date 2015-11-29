@@ -71,11 +71,7 @@ dotchart(accidentListShortOrder$年齡,labels=row.names(accidentListShortOrder),
 
 ### 圓餅pie chart
 
-<<<<<<< HEAD
 圓餅圖是呈現組成比例的圖形。
-=======
-圓餅圖是一種呈現比例的圖形。
->>>>>>> 024769b6240765e96b58be9adffe6bc7a8c75881
 
 ```{r}
 slices <- as.vector(table(accidentListNew$醫療檢傷))#把table轉為向量
