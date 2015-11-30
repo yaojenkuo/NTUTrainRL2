@@ -3,7 +3,7 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_2
 
 ## ggplot2
 
-ggplot2是
+ggplot2是R最熱門的畫圖套件!
 
 ```{r}
 install.packages("ggplot2")
