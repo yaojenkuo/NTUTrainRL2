@@ -1,9 +1,14 @@
-# NTUTrainRL2_1
-This is the lecture notes for NTU Train Course of R Project Lecture 2_1
+# NTUTrainRL2_2
+This is the lecture notes for NTU Train Course of R Project Lecture 2_2
 
-## R Base Plotting System
+## ggplot2
 
-不需要額外安裝套件就可以畫圖。
+ggplot2是
+
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+```
 
 ### 資料載入
 
@@ -116,5 +121,6 @@ legend("bottomright", pch=c(15, 16, 17), col=c("blue", "darkgreen", "blue"), c("
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook, Winston Chang
+* ggplot2 Essentials, Donato Teutonico
 
 &copy; Tony Yao-Jen Kuo 2015
