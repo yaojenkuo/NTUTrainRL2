@@ -63,10 +63,9 @@ grid.arrange(p1, p2, p3, p4, p5, ncol = 2)
 單純的散佈圖形。
 
 ```{r}
-par(mfrow=c(1,1))
 accidentListShort <- accidentListNew[accidentListNew$醫院所在縣市別=='桃園市' & !is.na(accidentListNew$年齡), ]
 accidentListShortOrder <- accidentListShort[order(accidentListShort$年齡), ]
-dotchart(accidentListShortOrder$年齡,labels=row.names(accidentListShortOrder),cex=.7, main="點圖依年齡", xlab="年齡")
+ggplot(accidentListShortOrder, aes(x = 年齡, y=reorder(row.names(accidentListShortOrder), 年齡))) + geom_point(size=3)+ylab("編號")+ggtitle("點圖依年齡")
 ```
 
 ### 圓餅pie chart
@@ -75,12 +74,12 @@ dotchart(accidentListShortOrder$年齡,labels=row.names(accidentListShortOrder),
 
 ```{r}
 slices <- as.vector(table(accidentListNew$醫療檢傷))#把table轉為向量
-labels <- paste(names(table(accidentListNew$醫療檢傷)), "\n", slices, "人", sep="")#table就是有名字的向量
-pie(slices, labels = labels, main="醫療檢傷人數")
-
-percentage <- round(slices/sum(slices)*100)
-labels2 <- paste(names(table(accidentListNew$醫療檢傷)), "\n", percentage, "%", sep="")
-pie(slices, labels=labels2, col=rainbow(length(labels2)), main="醫療檢傷比例")
+labels <- names(table(accidentListNew$醫療檢傷))
+percentage <- round(slices/sum(slices), 3)
+ymax <- cumsum(percentage)
+ymin <- c(0, head(ymax, n=-1))
+donutData <- data.frame(labels, percentage, ymax, ymin)
+ggplot(donutData) + geom_rect(aes(fill=labels, ymax=ymax, ymin=ymin, xmax=4, xmin=3)) + coord_polar(theta="y") + xlim(c(0, 4))
 ```
 
 ### 散佈圖scatter plot

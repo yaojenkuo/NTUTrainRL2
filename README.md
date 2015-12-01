@@ -20,5 +20,6 @@ https://github.com/yaojenkuo/NTUTrainRL2/blob/master/RL2_4.Rmd
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook, Winston Chang
+* ggplot2 Essentials, Donato Teutonico
 
 &copy; Tony Yao-Jen Kuo 2015
