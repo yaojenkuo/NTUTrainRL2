@@ -42,10 +42,7 @@ grid.arrange(p1, p2, p3, p4, p5, p6, ncol = 2)
 觀察連續型資料的分布。
 
 ```{r}
-par(mfrow=c(1,1))
-hist(na.omit(accidentListNew$年齡), xlab="年齡", ylab="密度",  main="依年齡", breaks=15, freq=FALSE, ylim=c(0, 0.12), col="skyblue")
-rug(jitter(accidentListNew$年齡))#在X軸上顯示資料密度
-lines(density(accidentListNew$年齡, na.rm=TRUE), col="red", lwd=2)#hist的freq要設為false才看得到
+ggplot(accidentListNew, aes(x=年齡))+geom_histogram(binwidth=3, fill="lightblue", colour="black")+ggtitle("八仙傷亡年齡直方圖")+ylab("頻率")
 ```
 
 ### 盒鬚圖boxplot
@@ -53,14 +50,12 @@ lines(density(accidentListNew$年齡, na.rm=TRUE), col="red", lwd=2)#hist的freq
 顯示數據分布情況包含最大值、最小值、中位數、下四分位數及上四分位數。
 
 ```{r}
-par(mfrow=c(3,2))
-boxPlots <- function(){
-  variables <- names(accidentListNew[, c(-2, -5)])
-  for (name in variables){
-    boxplot(年齡 ~ accidentListNew[ ,name], data=accidentListNew, main=paste('年齡依',name))
-  }
-}
-boxPlots()
+p1 <- ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")
+p2 <- ggplot(accidentListNew, aes(x=性別, y=年齡)) + geom_boxplot()+ggtitle("年齡依性別")
+p3 <- ggplot(accidentListNew, aes(x=國籍別, y=年齡)) + geom_boxplot()+ggtitle("年齡依國籍別")
+p4 <- ggplot(accidentListNew, aes(x=醫療檢傷, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫療檢傷別")
+p5 <- ggplot(accidentListNew, aes(x=救護檢傷, y=年齡)) + geom_boxplot()+ggtitle("年齡依救護檢傷別")
+grid.arrange(p1, p2, p3, p4, p5, ncol = 2)
 ```
 
 ### 點圖dot plot
