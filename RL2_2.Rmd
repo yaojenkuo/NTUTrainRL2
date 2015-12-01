@@ -26,15 +26,15 @@ accidentListNew <- subset(accidentList, 年齡!=101 | is.na(年齡))#使用一�
 以圖形高度代表資料量的統計圖形，主要用來處理離散型資料。
 
 ```{r}
-par(mfrow=c(3,2))
-barPlots <- function(){
-  variables <- names(accidentListNew[, c(-2, -5)])
-  for (name in variables){
-    barplot(table(accidentListNew[ ,name]), main=paste("依",name), ylab="人數")
-  }
-}
-barPlots()
-barplot(table(accidentListNew$醫院別), main="依醫院別", ylab="人數", las=2)
+library(grid)
+p1 <- ggplot(accidentListNew, aes(x=醫院所在縣市別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依醫院所在縣市別")
+p2 <- ggplot(accidentListNew, aes(x=性別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依性別")
+p3 <- ggplot(accidentListNew, aes(x=國籍別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依國籍別")
+p4 <- ggplot(accidentListNew, aes(x=醫療檢傷)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依醫療檢傷別")
+p5 <- ggplot(accidentListNew, aes(x=救護檢傷)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依救護檢傷別")
+p6 <- ggplot(accidentListNew, aes(x=醫院別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依醫院別")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+library(gridExtra)
+grid.arrange(p1, p2, p3, p4, p5, p6, ncol = 2)
 ```
 
 ### 直方圖histogram
