@@ -106,7 +106,11 @@ scatterPlot+stat_smooth(method=lm, level=0.99)+annotate("text", label=paste("Cor
 ```{r}
 year <- c(1996, 1997,	1998,	1999,	2000,	2001,	2002,	2003,	2004,	2005,	2006,	2007,	2008,	2009,	2010,	2011,	2012,	2013,	2014)
 salaryReal <- c(42520, 44195, 44798, 46040, 46605, 46716, 46330, 47058, 46989, 46447, 46521, 46650, 45038, 43193, 44989, 45508, 44726, 44446, 45494)
-plot(year, salaryReal, type="l", main=paste(" 歷年工業及服務業受僱員工以100年價格衡量之實質薪資"), sub=paste("資料來源: 行政院主計總處","\n","https://www.dgbas.gov.tw/public/Attachment/5225164112198I9Y1K.pdf"),  lwd=1, xlab="", ylab="")
+lineGraphData <- data.frame(year, salaryReal)
+
+ggplot(lineGraphData, aes(x=year, y=salaryReal)) + geom_line() + geom_point(size=4)+ggtitle("歷年工業及服務業受僱員工以100年價格衡量之實質薪資")+xlab("")+ylab("")
+
+plot(year, salaryReal, type="l", main=paste("歷年工業及服務業受僱員工以100年價格衡量之實質薪資"), sub=paste("資料來源: 行政院主計總處","\n","https://www.dgbas.gov.tw/public/Attachment/5225164112198I9Y1K.pdf"),  lwd=1, xlab="", ylab="")
 points(year[1:4], salaryReal[1:4], col="blue", bg="blue", pch=15)
 points(year[5:12], salaryReal[5:12], col="darkgreen", bg="darkgreen", pch=16)
 points(year[13:length(year)], salaryReal[13:length(salaryReal)], col="blue", bg="blue", pch=17)
