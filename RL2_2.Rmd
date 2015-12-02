@@ -92,10 +92,11 @@ ggplot(donutData) + geom_rect(aes(fill=labels, ymax=ymax, ymin=ymin, xmax=4, xmi
 #From 1999 to 2009, US Dept. of Energy and Centers of Disease Control & Prevention
 usCrudeOilFromNorway <- c(96, 110, 103, 127, 60, 54, 43, 36, 20, 11, 22)
 driverKilledInCollisionWithRailwayTrain <- c(76, 74, 76, 87, 66, 59, 63, 60, 55, 52, 46)
-plot(usCrudeOilFromNorway, driverKilledInCollisionWithRailwayTrain, main="Oil Import vs. Railway Kills", xlab="US Crude Oil Imported From Norway(in million barrels per year)", ylab="Driver Killed in Collision With Railway Train(in people per year)", pch=18, col="darkgreen", bg="darkgreen")
-abline(lm(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway), col="red", lwd=2) #add regression line
+scatterPlotData <- data.frame(usCrudeOilFromNorway, driverKilledInCollisionWithRailwayTrain)
+scatterPlot <- ggplot(scatterPlotData, aes(x=usCrudeOilFromNorway, y=driverKilledInCollisionWithRailwayTrain)) + geom_point(size=4)+ylab("Driver Killed in Collision With Railway Train(in people per year)")+xlab("US Crude Oil Imported From Norway(in million barrels per year)")+ggtitle("High correlation but no causality")
 correlation <- round(cor(usCrudeOilFromNorway, driverKilledInCollisionWithRailwayTrain), 4)*100
-text(85, 65, paste("Correlation: ",correlation, "%", sep=""))
+#add regression line and text
+scatterPlot+stat_smooth(method=lm, level=0.99)+annotate("text", label=paste("Correlation=",correlation), x=85, y=60)
 ```
 
 ### 線圖line graph
