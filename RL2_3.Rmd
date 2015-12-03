@@ -1,0 +1,21 @@
+# NTUTrainRL2_3
+This is the lecture notes for NTU Train Course of R Project Lecture 2_3
+
+## Geo Mapping
+
+我們要用ggplot2、Leftlet for R來做地圖資料探勘分析。
+
+### 什麼是Shapefile?
+
+### 什麼是GeoJSON?
+
+### ggplot2
+
+### Leaflet for R
+
+## Reference
+* R in Action, Robert I. Kabacoff
+* R Graphics Cookbook, Winston Chang
+* ggplot2 Essentials, Donato Teutonico
+
+&copy; Tony Yao-Jen Kuo 2015
