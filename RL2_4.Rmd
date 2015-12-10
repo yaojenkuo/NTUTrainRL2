@@ -1,0 +1,17 @@
+# NTUTrainRL2_4
+This is the lecture notes for NTU Train Course of R Project Lecture 2_4
+
+## R Markdown and Shiny
+
+### 什麼是Rmd?
+### Rmd輸出為.html與.pdf
+### 什麼是Shiny?
+### Shiny基本應用
+### Shiny進階應用
+
+## Reference
+* R in Action, Robert I. Kabacoff
+* R Graphics Cookbook, Winston Chang
+* ggplot2 Essentials, Donato Teutonico
+
+&copy; Tony Yao-Jen Kuo 2015

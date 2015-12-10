@@ -21,7 +21,11 @@ A notable offspring of GeoJSON is TopoJSON, an extension of GeoJSON that encodes
 
 ### ggplot2
 
+
+
 ### Leaflet for R
+
+
 
 ## Reference
 * R in Action, Robert I. Kabacoff
