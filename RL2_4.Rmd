@@ -4,7 +4,17 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_4
 ## R Markdown and Shiny
 
 ### 什麼是Rmd?
+
+R Markdown is an authoring format that enables easy creation of dynamic documents, presentations, and reports from R. It combines the core syntax of markdown (an easy-to-write plain text format) with embedded R code chunks that are run so their output can be included in the final document. R Markdown documents are **fully reproducible** (they can be automatically regenerated whenever underlying R code or data changes).
+
 ### Rmd輸出為.html與.pdf
+
+#### .html
+To create an HTML document from R Markdown you specify the **html_document** output format in the front-matter of your document:
+
+#### .pdf
+To create a PDF document from R Markdown you specify the **pdf_document** output format in the front-matter of your document:
+
 ### 什麼是Shiny?
 ### Shiny基本應用
 ### Shiny進階應用
