@@ -117,6 +117,16 @@ points(year[13:length(year)], salaryReal[13:length(salaryReal)], col="blue", bg=
 legend("bottomright", pch=c(15, 16, 17), col=c("blue", "darkgreen", "blue"), c("李登輝", "陳水扁", "馬英九"), bty="o",  box.col="black", cex=.8)
 ```
 
+### 其他的圖形
+
+#### 熱圖Heatmap
+
+#### 馬賽克圖Mosaic Plot
+
+#### 樹狀圖Treemap
+
+#### 網絡圖Network Plot
+
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook, Winston Chang
