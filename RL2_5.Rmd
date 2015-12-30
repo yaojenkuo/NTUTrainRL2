@@ -1,0 +1,11 @@
+# NTUTrainRL2_5
+This is the lecture notes for NTU Train Course of R Project Lecture 2_5
+
+## Plotly
+
+## Reference
+* R in Action, Robert I. Kabacoff
+* R Graphics Cookbook, Winston Chang
+* ggplot2 Essentials, Donato Teutonico
+
+&copy; Tony Yao-Jen Kuo 2015

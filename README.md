@@ -17,6 +17,10 @@ https://github.com/yaojenkuo/NTUTrainRL2/blob/master/RL2_3.Rmd
 
 https://github.com/yaojenkuo/NTUTrainRL2/blob/master/RL2_4.Rmd
 
+## Plotly
+
+https://github.com/yaojenkuo/NTUTrainRL2/blob/master/RL2_5.Rmd
+
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook, Winston Chang
