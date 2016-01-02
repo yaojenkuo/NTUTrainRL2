@@ -3,6 +3,12 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_5
 
 ## Plotly
 
+### Basic Charts
+
+### Statistical Charts
+
+### ADD CUSTOM CONTROLS WITH JAVASCRIPT
+
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook, Winston Chang
