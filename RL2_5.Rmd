@@ -7,7 +7,7 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_5
 
 ### Statistical Charts
 
-### ADD CUSTOM CONTROLS WITH JAVASCRIPT
+### Add Custom Controls
 
 ## Reference
 * R in Action, Robert I. Kabacoff
