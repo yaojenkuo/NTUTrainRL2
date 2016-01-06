@@ -11,13 +11,21 @@ R Markdown是一種編輯檔案格式(.Rmd)可以幫助使用者用R快速產生
 library(knitr)#RStudio內建
 ```
 
+### Rmd Syntax Basics
+
+
+
 ### Rmd輸出為.html與.pdf
 
 #### .html
 指定**html_document**參數:`output: html_document`
   
 #### .pdf
-指定**pdf_document**參數:`output: pdf_document`
+* 先安裝MikTeX
+  http://miktex.org/download
+* 執行MikTeX Update
+  http://miktex.org/howto/update-miktex
+* 指定**pdf_document**參數:`output: pdf_document`
 
 ### 什麼是Shiny?
 ### Shiny基本應用

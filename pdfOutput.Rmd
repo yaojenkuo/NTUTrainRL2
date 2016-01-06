@@ -1,0 +1,86 @@
+---
+title: "PDF Output"
+author: "Yao-Jen Kuo"
+date: "January 6, 2016"
+output: 
+  pdf_document
+---
+
+# This is header 1
+
+This is an *italic*.
+
+This is a **bold**.
+
+# This is another header 1
+
+## This is header 2
+
+### This is header 3
+
+# Lists
+
+## Unordered List
+
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b
+
+## Ordered List
+
+1. Item 1
+2. Item 2
+  * Item 2a
+  * Item 2b
+
+# Plain Code Chunks
+```
+This text is displayed verbatim / preformatted
+```
+
+# R Code Chunks
+
+```{r}
+plot(cars)
+```
+
+# Inline R Code and R Code Chunks Option
+
+You may also specify `echo=FALSE` to prevent printing out `summary(cars)` command but still get the summary result.
+
+```{r, echo=FALSE}
+summary(cars)
+```
+
+# Links
+
+[Click here to link to NTUCSIE Train](https://www.csie.ntu.edu.tw/train/)
+
+# Images
+
+![The Art of R Programming](http://freecomputerbooks.com/covers/The-Art-of-R-Programming-Matloff-Norman.jpg)
+
+# Blockquotes
+
+> I am your father.
+
+Darth Vadar
+
+# LaTeX Equations
+
+## Inline equation
+
+## Display equation
+
+# Horizontal Rule / Page Break
+
+---
+
+# Tables
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+Reference Style Links and Images
