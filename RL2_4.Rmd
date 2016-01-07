@@ -7,15 +7,14 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_4
 
 R Markdown是一種編輯檔案格式(.Rmd)可以幫助使用者用R快速產生文件、簡報或報告，包含R程式碼區塊功能，可以讓產出的圖形、結果呈現在文件中。
 
-### Rmd Syntax Basics
-
-https://github.com/yaojenkuo/NTUTrainRL2/blob/master/htmlOutput.Rmd
-
-https://github.com/yaojenkuo/NTUTrainRL2/blob/master/pdfOutput.Rmd
-
 ### Rmd輸出為.html與.pdf
 
 #### .html
+
+![開啟新的R markdown檔案](image/Rmd01.jpg)
+
+![開啟新的R markdown檔案](image/Rmd02.jpg)
+
 指定**html_document**參數:`output: html_document`
   
 #### .pdf
@@ -23,7 +22,16 @@ https://github.com/yaojenkuo/NTUTrainRL2/blob/master/pdfOutput.Rmd
   http://miktex.org/download
 * 執行MikTeX Update
   http://miktex.org/howto/update-miktex
+* 開啟新的R markdown檔案
+  ![開啟新的R markdown檔案](image/Rmd01.jpg)
 * 指定**pdf_document**參數:`output: pdf_document`
+  ![Open a new R markdown file](image/Rmd03.jpg)
+
+### Rmd Syntax Basics
+
+https://github.com/yaojenkuo/NTUTrainRL2/blob/master/htmlOutput.Rmd
+
+https://github.com/yaojenkuo/NTUTrainRL2/blob/master/pdfOutput.Rmd
 
 ### 什麼是Shiny?
 ### Shiny基本應用
