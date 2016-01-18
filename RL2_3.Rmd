@@ -3,33 +3,34 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_3
 
 ## Geo Mapping
 
-我們要用ggplot2、Leftlet for R來做地圖資料探勘分析。
-
-### 什麼是Shapefile?
-
-The shapefile format is a popular geospatial vector data format for geographic information system (GIS) software.
-It is developed and regulated by Esri as a (mostly) open specification for data interoperability among Esri and other GIS software products.
-The shapefile format can spatially describe vector features: points, lines, and polygons, representing, for example, water wells, rivers, and lakes.
-Each item usually has attributes that describe it, such as name or temperature.
-
-### 什麼是GeoJSON?
-
-GeoJSON is an open standard format designed for representing simple geographical features, along with their non-spatial attributes, based on JavaScript Object Notation.
-The features include points (therefore addresses and locations), line strings (therefore streets, highways and boundaries), polygons (countries, provinces, tracts of land), and multi-part collections of these types. GeoJSON features need not represent entities of the physical world only; mobile routing and navigation apps, for example, might describe their service coverage using GeoJSON.
-The GeoJSON format differs from other GIS standards in that it was written and is maintained not by a formal standards organization, but by an Internet working group of developers.
-A notable offspring of GeoJSON is TopoJSON, an extension of GeoJSON that encodes geospatial topology and that typically provides smaller file sizes.
-
-### ggplot2
-
-
+我們要用Leftlet for R來做地圖資料探勘分析。
 
 ### Leaflet for R
 
+#### 簡介
 
+#### 標記
+
+#### 說明
+
+#### 路徑與範圍
+
+#### JSON資料格式
+
+#### Raster Images
+
+#### 與Shiny整合
+
+#### 顏色
+
+#### 圖例
+
+#### 圖層
 
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook, Winston Chang
 * ggplot2 Essentials, Donato Teutonico
+* Leaflet for R
 
 &copy; Tony Yao-Jen Kuo 2015
