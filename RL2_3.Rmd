@@ -3,11 +3,31 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_3
 
 ## Geo Mapping
 
-我們要用Leftlet for R來做地圖資料探勘分析。
+我們要用Leftlet for R來做地圖資料探勘分析，Leaflet是眾多JavaScript套件中很受歡迎的互動式地圖，知名網站[The New York Times]()與[The Washington Post]()都是使用Leaflet.js。而Leaflet for R讓R語言使用者能夠跳過撰寫JavaScript來使用它。
 
 ### Leaflet for R
 
 #### 簡介
+
+你的第一個地圖helloMap
+
+```{r}
+#安裝並且載入leaflet與magrittr這兩個套件
+packs <- c("leaflet", "magrittr")
+for (i in 1:length(packs)){
+  install.packages(packs[i])
+}
+sapply(packs, library, character.only=T)
+
+helloMap <- leaflet() %>%
+  addTiles() %>% #把預設的地圖圖層加入
+  addMarkers(lng=, lat=, popup="National Taiwan University")
+helloMap
+```
+
+#### 地圖工具集
+
+
 
 #### 標記
 
