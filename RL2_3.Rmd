@@ -3,7 +3,7 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_3
 
 ## Geo Mapping
 
-我們要用Leftlet for R來做地圖資料探勘分析，Leaflet是眾多JavaScript套件中很受歡迎的互動式地圖，知名網站[The New York Times]()與[The Washington Post]()都是使用Leaflet.js。而Leaflet for R讓R語言使用者能夠跳過撰寫JavaScript來使用它。
+我們要用Leftlet for R來做地圖資料探勘分析，Leaflet是眾多JavaScript套件中很受歡迎的互動式地圖，知名網站[The New York Times](http://www.nytimes.com/projects/elections/2013/nyc-primary/mayor/map.html)與[The Washington Post](http://www.washingtonpost.com/sf/local/2013/11/09/washington-a-world-apart/)都是使用Leaflet.js。而Leaflet for R讓R語言使用者能夠跳過撰寫JavaScript來使用它。
 
 ### Leaflet for R
 
@@ -29,11 +29,47 @@ helloMap <- addMarkers(addTiles(leaflet()), lng=121.539366, lat=25.017326, popup
 helloMap
 ```
 
-#### 地圖工具集
+#### 基本地圖
 
+`setView()`用來設定地圖中心與縮放比例。
 
+```{r}
+baseMap <- leaflet() %>% 
+  setView(lng = 121.539366, lat = 25.017326, zoom = 14) %>% 
+  addTiles()
+baseMap
+```
+
+`addTiles()`使用預設的[OpenStreetMap](https://www.openstreetmap.org/#map=5/51.500/-0.100);`addProviderTiles()`可以使用其他的[leaflet-provider plugin](http://leaflet-extras.github.io/leaflet-providers/preview/index.html)，注意其中有些地圖可能要在該專案註冊才能呼叫。
+
+```{r}
+#Stamen
+providerMap <- leaflet() %>%
+  setView(lng = 121.539366, lat = 25.017326, zoom = 10) %>%
+  addProviderTiles("Stamen.TonerLite")
+providerMap
+
+#Thunderforest
+providerMap <- leaflet() %>%
+  setView(lng = 121.539366, lat = 25.017326, zoom = 10) %>%
+  addProviderTiles("Thunderforest.OpenCycleMap")
+providerMap
+```
+
+我們也可以結合多個**Provider Tiles**，使用`options`來指定圖層的透明度。
+
+```{r}
+combineMap <- leaflet() %>%
+  setView(lng = 121.539366, lat = 25.017326, zoom = 10) %>%
+  addProviderTiles("Stamen.TonerLite") %>%
+  addProviderTiles("Thunderforest.OpenCycleMap",
+    options = providerTileOptions(opacity = 0.5))
+combineMap
+```
 
 #### 標記
+
+
 
 #### 說明
 
@@ -54,7 +90,6 @@ helloMap
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook, Winston Chang
-* ggplot2 Essentials, Donato Teutonico
 * Leaflet for R
 
 &copy; Tony Yao-Jen Kuo 2015
