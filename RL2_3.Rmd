@@ -21,7 +21,7 @@ sapply(packs, library, character.only=T)
 
 helloMap <- leaflet() %>%
   addTiles() %>% #把預設的地圖圖層加入
-  addMarkers(.,lng=121.539366, lat=25.017326, popup="National Taiwan University")
+  addMarkers(lng=121.539366, lat=25.017326, popup="National Taiwan University")
 helloMap
 
 # 如果你不習慣使用pipe run %>%
@@ -69,7 +69,18 @@ combineMap
 
 #### 標記
 
+`addMarkers()`用來新增地點的標記與點擊後出現的訊息。
 
+```{r}
+markerNTU <- leaflet() %>%
+  addTiles() %>%
+  addMarkers(lng=121.539366, lat=25.017326, popup="National Taiwan University")
+markerNTU
+```
+
+```{r}
+
+```
 
 #### 說明
 
