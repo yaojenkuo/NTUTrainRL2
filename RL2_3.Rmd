@@ -78,8 +78,18 @@ markerNTU <- leaflet() %>%
 markerNTU
 ```
 
-```{r}
+用台北市的7-11來做範例。
 
+```{r}
+Sys.setlocale(category="LC_ALL", locale="")
+#stores711inTP <- read.table("C:/NTUTrainRL2/data/stores711inTP.csv", header=T, sep=",", stringsAsFactors=F)
+
+stores711inTPMap <- readRDS("C:/NTUTrainRL2/data/stores711inTP.rds")
+
+markers711 <- leaflet(data=stores711inTPMap) %>%
+  addTiles() %>%
+  addMarkers(~lng, ~lat, popup=~popups)
+markers711
 ```
 
 #### 說明
