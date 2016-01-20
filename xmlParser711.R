@@ -5,6 +5,10 @@
 packages <- c("httr", "XML", "stringr", "data.table", "DT")
 sapply(packages, library, character.only=T)
 
+# Locale
+
+Sys.setlocale(category="LC_ALL", locale='cht')
+
 # Get Stores
 Get_Stores <- function(city, town){
   res <- POST("http://emap.pcsc.com.tw/EMapSDK.aspx", body = list(commandid="SearchStore", city = city, town = town))
@@ -13,9 +17,6 @@ Get_Stores <- function(city, town){
     xmlToDataFrame()
   return(stores)
 }
-#Sys.setlocale(category = "LC_ALL", locale="cht")
-#storesDaan <- Get_Stores("台北市", "大安區")
-#View(storesDaan)
 
 # Get Towns
 Get_Towns <- function(cityid) {
@@ -25,12 +26,10 @@ Get_Towns <- function(cityid) {
     xmlToDataFrame()
   return(towns)
 }
-#towns01 <- Get_Towns('01')
-#View(towns01)
 
 #Get Cities
-res<-GET("http://emap.pcsc.com.tw/lib/areacode.js")
-res_text<-content(res,"text",encoding = "utf8")
+res <- GET("http://emap.pcsc.com.tw/lib/areacode.js")
+res_text <- content(res,"text",encoding = "utf8")
 cityreg <- "new AreaNode\\(\\'(.*)\\'.*new bu.* \\'(.*)\\'"
 cities <- res_text %>% 
   str_match_all(cityreg)%>% 
@@ -71,8 +70,5 @@ storesInTPMap <- transform(
 stores711inTP <- storesInTPMap[, -c(1:5)]
 
 # Write.csv
-#big5File <- file('C:/NTUTrainRL2/data/stores711inTP.csv', encoding="big5")
-#write.csv(stores711inTP, file=big5File, row.names=F)
-
-# saveRDS
-saveRDS(stores711inTP, "C:/NTUTrainRL2/data/stores711inTP.rds")
+utf8File <- file('C:/NTUTrainRL2/data/stores711inTP.csv', encoding="utf8")
+write.csv(stores711inTP, file=utf8File, row.names=F)

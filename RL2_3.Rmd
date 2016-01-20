@@ -81,12 +81,13 @@ markerNTU
 用台北市的7-11來做範例。
 
 ```{r}
-Sys.setlocale(category="LC_ALL", locale="")
-#stores711inTP <- read.table("C:/NTUTrainRL2/data/stores711inTP.csv", header=T, sep=",", stringsAsFactors=F)
+Sys.setlocale(category="LC_ALL", locale = "cht")
+stores <- read.table("C:/NTUTrainRL2/data/stores711inTP.csv", header=T, sep=",", stringsAsFactors=F, encoding = "UTF-8")
+View(stores)
 
-stores711inTPMap <- readRDS("C:/NTUTrainRL2/data/stores711inTP.rds")
+#stores711inTPMap <- readRDS("C:/NTUTrainRL2/data/stores711inTP.rds")
 
-markers711 <- leaflet(data=stores711inTPMap) %>%
+markers711 <- leaflet(data=stores) %>%
   addTiles() %>%
   addMarkers(~lng, ~lat, popup=~popups)
 markers711
