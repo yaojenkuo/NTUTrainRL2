@@ -86,19 +86,60 @@ stores <- read.table("C:/NTUTrainRL2/data/stores711inTP.csv", header=T, sep=",",
 
 markers711 <- leaflet(data=stores) %>%
   addTiles() %>%
-  addMarkers(~lng, ~lat, popup=~popups2)
+  addMarkers(~lng, ~lat, popup=~as.character(popups2))
 markers711
 ```
 
-客製化標記的圖示。
+加入`icon`與`iconSize`參數客製化標記的圖示。
 
 ```{r}
-
+markers711 <- leaflet(data=stores) %>%
+  addTiles() %>%
+  addMarkers(~lng, ~lat, popup=~as.character(popups2), icon = list(iconUrl = "C:/NTUTrainRL2/image/711_logo.gif", iconSize = c(20, 20)))
+markers711
 ```
 
-#### 說明
+加入`clusterOptions`參數讓標記在縮放時形成聚落。
 
-#### 路徑與範圍
+```{r}
+markers711 <- leaflet(data=stores) %>%
+  addTiles() %>%
+  addMarkers(~lng, ~lat, popup=~as.character(popups2), icon = list(iconUrl = "C:/NTUTrainRL2/image/711_logo.gif", iconSize = c(20, 20)), clusterOptions = markerClusterOptions())
+markers711
+```
+
+#### 圓形與長方形
+
+`addCircles()`用來加入圓形。
+
+```{r}
+cities <- read.csv(textConnection("
+City,Lat,Long,Pop
+Boston,42.3601,-71.0589,645966
+Hartford,41.7627,-72.6743,125017
+New York City,40.7127,-74.0059,8406000
+Philadelphia,39.9500,-75.1667,1553000
+Pittsburgh,40.4397,-79.9764,305841
+Providence,41.8236,-71.4222,177994
+"))
+
+circleOnMap <- leaflet(cities) %>% 
+  addTiles() %>%
+  addCircles(lng = ~Long, lat = ~Lat, weight = 1, radius = ~sqrt(Pop) * 30, popup = ~City)
+circleOnMap
+```
+
+指定兩組經緯度使用`addRectangles()`畫出長方形。
+
+```{r}
+rectangleOnMap <- leaflet() %>%
+  addTiles() %>%
+  addRectangles(
+    lng1=-118.456554, lat1=34.078039,
+    lng2=-118.436383, lat2=34.062717,
+    fillColor = "transparent")
+rectangleOnMap
+```
 
 #### JSON資料格式
 
