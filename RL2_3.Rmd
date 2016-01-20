@@ -143,9 +143,17 @@ rectangleOnMap
 
 #### JSON資料格式
 
-#### Raster Images
+使用`addGeoJSON()`與`addTopoJSON()`加入parsed(nested lists)與stringified(single-element character vector)GeoJSON資料。
 
-#### 與Shiny整合
+```{r}
+topoData <- readLines("C:/NTUTrainRL2/data/twTown1982.topo.json", warn=FALSE) %>%
+  paste(collapse = "\n")
+
+leaflet() %>%
+  setView(lng = 121.081340, lat = 23.905183, zoom = 6) %>%
+  addTiles() %>%
+  addTopoJSON(topoData, weight = 2, color = "#444444", fill = FALSE)
+```
 
 #### 顏色
 
