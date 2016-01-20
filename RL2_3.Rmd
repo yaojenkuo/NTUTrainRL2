@@ -114,29 +114,29 @@ markers711
 
 ```{r}
 cities <- read.csv(textConnection("
-City,Lat,Long,Pop
-Boston,42.3601,-71.0589,645966
-Hartford,41.7627,-72.6743,125017
-New York City,40.7127,-74.0059,8406000
-Philadelphia,39.9500,-75.1667,1553000
-Pittsburgh,40.4397,-79.9764,305841
-Providence,41.8236,-71.4222,177994
+city,lat,lng,pop
+New Taipei,25.016028,121.462062,3966818
+Taipei,25.033141,121.559886,2702315
+Taichung,24.149360,120.669673,2719835
+Tainan,22.998952,120.226100,1884284
+Kaohsiung,22.626788,120.312617,2778992
 "))
 
 circleOnMap <- leaflet(cities) %>% 
+  setView(lng = 121.081340, lat = 23.905183, zoom = 6) %>%
   addTiles() %>%
-  addCircles(lng = ~Long, lat = ~Lat, weight = 1, radius = ~sqrt(Pop) * 30, popup = ~City)
+  addCircles(lng = ~lng, lat = ~lat, weight = 1, radius = ~sqrt(pop) * 30, popup = ~sprintf("%s</br>%s ppl",city,pop))
 circleOnMap
 ```
 
-指定兩組經緯度使用`addRectangles()`畫出長方形。
+指定兩組(對角)經緯度使用`addRectangles()`畫出長方形。
 
 ```{r}
 rectangleOnMap <- leaflet() %>%
   addTiles() %>%
   addRectangles(
-    lng1=-118.456554, lat1=34.078039,
-    lng2=-118.436383, lat2=34.062717,
+    lng1=121.531157, lat1=25.023037,
+    lng2=121.545748, lat2=25.012381,
     fillColor = "transparent")
 rectangleOnMap
 ```
