@@ -83,14 +83,17 @@ markerNTU
 ```{r}
 Sys.setlocale(category="LC_ALL", locale = "cht")
 stores <- read.table("C:/NTUTrainRL2/data/stores711inTP.csv", header=T, sep=",", stringsAsFactors=F, encoding = "UTF-8")
-View(stores)
-
-#stores711inTPMap <- readRDS("C:/NTUTrainRL2/data/stores711inTP.rds")
 
 markers711 <- leaflet(data=stores) %>%
   addTiles() %>%
-  addMarkers(~lng, ~lat, popup=~popups)
+  addMarkers(~lng, ~lat, popup=~popups2)
 markers711
+```
+
+客製化標記的圖示。
+
+```{r}
+
 ```
 
 #### 說明

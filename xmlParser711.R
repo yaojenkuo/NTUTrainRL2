@@ -60,14 +60,15 @@ storesInTP <- rbindlist(stores)
 storesInTP <- data.frame(storesInTP)
 
 # Create new columns of lat, lng, and popups
-storesInTPMap <- storesInTP[, c("X", "Y", "POIName", "Telno", "Address")]
+storesInTPMap <- storesInTP[, c("POIID", "X", "Y", "POIName", "Telno", "Address")]
 storesInTPMap <- transform(
   storesInTPMap,
   lng = as.numeric(as.character(X))/1000000,
   lat = as.numeric(as.character(Y))/1000000,
-  popups = sprintf("<p>%s</p><p>%s</p><p>%s</p>", POIName, Telno, Address)
-)
-stores711inTP <- storesInTPMap[, -c(1:5)]
+  popups1 = sprintf("<p>%s</p><p>%s</p><p>%s</p>",POIName, Telno, Address),
+  popups2 = sprintf("<p>%s</p><p>%s</p>",POIID, Telno)
+  )
+stores711inTP <- storesInTPMap[, -c(1:6)]
 
 # Write.csv
 utf8File <- file('C:/NTUTrainRL2/data/stores711inTP.csv', encoding="utf8")
