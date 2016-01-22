@@ -245,6 +245,6 @@ layeredMap
 ```
 
 ## Reference
-* (Leaflet for R)[https://rstudio.github.io/leaflet/]
+* [Leaflet for R](https://rstudio.github.io/leaflet/)
 
 &copy; Tony Yao-Jen Kuo 2015
