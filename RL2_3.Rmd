@@ -218,14 +218,7 @@ countriesPopMap
 使用`addLayersControl()`來製作控制面板。
 
 ```{r}
-cities <- read.csv(textConnection("
-city,lat,lng,pop
-New Taipei,25.016028,121.462062,3966818
-Taipei,25.033141,121.559886,2702315
-Taichung,24.149360,120.669673,2719835
-Tainan,22.998952,120.226100,1884284
-Kaohsiung,22.626788,120.312617,2778992
-"))
+# 利用cities五都人口數資料集
 
 layeredMap <- leaflet(data=cities) %>% 
   setView(lng = 121.081340, lat = 23.905183, zoom = 6) %>%
