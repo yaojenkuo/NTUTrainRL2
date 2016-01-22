@@ -113,6 +113,50 @@ points(year[13:length(year)], salaryReal[13:length(salaryReal)], col="blue", bg=
 legend("bottomright", pch=c(15, 16, 17), col=c("blue", "darkgreen", "blue"), c("李登輝", "陳水扁", "馬英九"), bty="o",  box.col="black", cex=.8)
 ```
 
+### 調整圖形的重要參數
+
+#### X軸與Y軸的值域
+
+利用`xlim=c()`與`ylim=c()`來設定。
+
+```{r}
+par(mfrow=c(1,2))
+plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway)
+plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway, xlim=c(0,150), ylim=c(0,100))
+```
+
+#### 在一張畫布上輸出多張圖形
+
+利用`par(mfrow=c(m,n))`來設定。
+
+```{r}
+par(mfrow=c(1,1))
+plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway)
+par(mfrow=c(1,2))
+plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway)
+plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway, xlim=c(0,150), ylim=c(0,100))
+```
+
+#### 圖例說明
+
+```{r}
+Sys.setlocale(category = "LC_ALL", locale = "cht")
+nthyear <- c(5, 6,	7, 8,	1,	2,	3,	4,	5,	6,	7,	8,	1,	2,	3,	4,	5,	6,	7)
+salaryReal <- c(42520, 44195, 44798, 46040, 46605, 46716, 46330, 47058, 46989, 46447, 46521, 46650, 45038, 43193, 44989, 45508, 44726, 44446, 45494)
+presidents <- c("李登輝", "李登輝", "李登輝", "李登輝", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九")
+lineDataFrame <- data.frame(nthyear, salaryReal, presidents)
+library(reshape2)
+lineDataFrameCast <- dcast(lineDataFrame, nthyear~presidents, value.var = "salaryReal")
+par(mfrow=c(1,1))
+plot(lineDataFrameCast[, 2]~lineDataFrameCast[, 1], type="l", col="goldenrod", ylim=c(42000, 50000), lwd=2)
+lines(lineDataFrameCast[, 3], type="l", col="blue", lwd=2)
+lines(lineDataFrameCast[, 4], type="l", col="darkgreen", lwd=2)
+#legend("topright", legend=c("李登輝","馬英九","陳水扁"), col=c("goldenrod", "blue", "darkgreen"), lty=1, lwd=2)#會遮住線
+legend("top", legend=c("李登輝","馬英九","陳水扁"), ncol=3, cex=0.8, bty="n", col=c("goldenrod", "blue", "darkgreen"), lty=1, lwd=2)
+```
+
+
+
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook, Winston Chang
