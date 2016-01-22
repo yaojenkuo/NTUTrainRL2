@@ -209,5 +209,6 @@ col.main="darkgreen")
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook, Winston Chang
+* R Graphs Cookbook, Hrishi V. Mittal
 
-&copy; Tony Yao-Jen Kuo 2015
+&copy; Tony Yao-Jen Kuo 2016
