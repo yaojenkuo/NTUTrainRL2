@@ -201,6 +201,6 @@ ggplot(accidentListNew, aes(x=年齡))+geom_histogram(binwidth=3, fill="red", co
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook, Winston Chang
-* ggplot2 Essentials, Donato Teutonico
+* R Graphs Cookbook, Hrishi V. Mittal
 
-&copy; Tony Yao-Jen Kuo 2015
+&copy; Tony Yao-Jen Kuo 2016
