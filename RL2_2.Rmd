@@ -107,25 +107,96 @@ scatterPlot+stat_smooth(method=lm, level=0.99)+annotate("text", label=paste("Cor
 year <- c(1996, 1997,	1998,	1999,	2000,	2001,	2002,	2003,	2004,	2005,	2006,	2007,	2008,	2009,	2010,	2011,	2012,	2013,	2014)
 salaryReal <- c(42520, 44195, 44798, 46040, 46605, 46716, 46330, 47058, 46989, 46447, 46521, 46650, 45038, 43193, 44989, 45508, 44726, 44446, 45494)
 lineGraphData <- data.frame(year, salaryReal)
-
 ggplot(lineGraphData, aes(x=year, y=salaryReal)) + geom_line() + geom_point(size=4)+ggtitle("歷年工業及服務業受僱員工以100年價格衡量之實質薪資")+xlab("")+ylab("")
-
-plot(year, salaryReal, type="l", main=paste("歷年工業及服務業受僱員工以100年價格衡量之實質薪資"), sub=paste("資料來源: 行政院主計總處","\n","https://www.dgbas.gov.tw/public/Attachment/5225164112198I9Y1K.pdf"),  lwd=1, xlab="", ylab="")
-points(year[1:4], salaryReal[1:4], col="blue", bg="blue", pch=15)
-points(year[5:12], salaryReal[5:12], col="darkgreen", bg="darkgreen", pch=16)
-points(year[13:length(year)], salaryReal[13:length(salaryReal)], col="blue", bg="blue", pch=17)
-legend("bottomright", pch=c(15, 16, 17), col=c("blue", "darkgreen", "blue"), c("李登輝", "陳水扁", "馬英九"), bty="o",  box.col="black", cex=.8)
 ```
 
-### 其他的圖形
+### 調整圖形的重要參數
 
-#### 熱圖Heatmap
+#### 文字註記
+
+使用`+annotate("text", x=#, y=#, label="label1")`在圖上做文字註記。
+
+```{r}
+ggplot(lineGraphData, aes(x=year, y=salaryReal)) + geom_line() + geom_point(size=4)+ggtitle("歷年工業及服務業受僱員工以100年價格衡量之實質薪資")+xlab("")+ylab("")+annotate("text", x=1998, y=44000, label="李登輝執政")+annotate("text", x=2002, y=46000, label="陳水扁執政")+annotate("text", x=2011, y=44000, label="馬英九執政")
+```
+
+#### 坐標軸
+
+使用`+coord_flip()`翻轉X軸與Y軸。
+
+```{r}
+ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+coord_flip()
+```
+
+使用`+xlim()`與`+ylim()`更改坐標軸值域。
+
+```{r}
+ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+ylim(0, 50)
+```
+
+#### 設定標題
+
+使用`+ggtitle("title")`來設定標題。
+
+#### 隱藏格線
+
+* 使用`+theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank())`隱藏全部格線
+* 使用`+theme(panel.grid.major.x=element_blank(), panel.grid.minor.x=element_blank())`隱藏全部X格線
+* 使用`+theme(panel.grid.major.y=element_blank(), panel.grid.minor.y=element_blank())`隱藏全部Y格線
+
+```{r}
+ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank())
+```
+
+#### 改變背景顏色
+
+使用`+theme_bw()`更改為白色，`+theme_grey()`更改為預設。
+
+```{r}
+ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+theme_bw()
+```
+
+#### 圖例
+
+使用`+guides(fill=FALSE)`移除圖例。
+
+```{r}
+ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡, fill=醫院所在縣市別)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")
+ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡, fill=醫院所在縣市別)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+guides(fill=FALSE)
+```
+
+使用`+theme(legend.position="#position")`來指定圖例位置。
+
+```{r}
+ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡, fill=醫院所在縣市別)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+theme(legend.position="top")
+```
+
+#### Facets
+
+使用`facet_grid()`做交叉圖形。
+
+```{r}
+ggplot(accidentListNew, aes(x=性別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依性別")+facet_grid(. ~醫療檢傷)#1*n
+ggplot(accidentListNew, aes(x=性別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依性別")+facet_grid(醫療檢傷~.)#m*1
+ggplot(accidentListNew, aes(x=性別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依性別")+facet_grid(醫療檢傷~救護檢傷)#m*n
+```
+
+#### 顏色
+
+使用`colour()`或`fill()`指定顏色。
+
+```{r}
+ggplot(scatterPlotData, aes(x=usCrudeOilFromNorway, y=driverKilledInCollisionWithRailwayTrain)) + geom_point(colour="red", size=4)
+ggplot(accidentListNew, aes(x=年齡))+geom_histogram(binwidth=3, fill="red", colour="black")+ggtitle("八仙傷亡年齡直方圖")+ylab("頻率")
+```
+
+### 其他的ggplot2圖形
+
+#### 函數圖Function Plot
+
+#### 熱圖Heat Map
 
 #### 馬賽克圖Mosaic Plot
-
-#### 樹狀圖Treemap
-
-#### 網絡圖Network Plot
 
 ## Reference
 * R in Action, Robert I. Kabacoff
