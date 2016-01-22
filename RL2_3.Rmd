@@ -122,7 +122,7 @@ Tainan,22.998952,120.226100,1884284
 Kaohsiung,22.626788,120.312617,2778992
 "))
 
-circleOnMap <- leaflet(cities) %>% 
+circleOnMap <- leaflet(data=cities) %>% 
   setView(lng = 121.081340, lat = 23.905183, zoom = 6) %>%
   addTiles() %>%
   addCircles(lng = ~lng, lat = ~lat, weight = 1, radius = ~sqrt(pop) * 30, popup = ~sprintf("%s</br>%s ppl",city,pop))
@@ -146,24 +146,105 @@ rectangleOnMap
 使用`addGeoJSON()`與`addTopoJSON()`加入parsed(nested lists)與stringified(single-element character vector)GeoJSON資料。
 
 ```{r}
-topoData <- readLines("C:/NTUTrainRL2/data/twTown1982.topo.json", warn=FALSE) %>%
+twTopoData <- readLines("C:/NTUTrainRL2/data/twTown1982.topo.json", warn=FALSE) %>%
   paste(collapse = "\n")
 
 leaflet() %>%
   setView(lng = 121.081340, lat = 23.905183, zoom = 6) %>%
   addTiles() %>%
-  addTopoJSON(topoData, weight = 2, color = "#444444", fill = FALSE)
+  addTopoJSON(twTopoData, weight = 2, color = "#444444", fill = FALSE)
 ```
 
 #### 顏色
 
+使用現成的GeoJSON檔案[countries](http://data.okfn.org/data/datasets/geo-boundaries-world-110m)來做示範。
+
+```{r}
+# 資料來源http://data.okfn.org/data/datasets/geo-boundaries-world-110m
+install.packages("rgdal")#取得readORG function
+library(rgdal)#取得readORG function
+countries <- readOGR("C:/NTUTrainRL2/data/countries.geojson", "OGRGeoJSON")
+```
+
+使用連續型變數**人口(pop_est)**作為著色的根據，我們使用`colorNumeric()`並參照(COLOR BREWER 2.0)[http://colorbrewer2.org/]與來畫出我們的調色盤。
+
+```{r}
+numericPalette <- colorNumeric(palette="Greens", domain=countries$pop_est)
+countriesPopMap <- leaflet(data=countries) %>%
+  addProviderTiles("Stamen.TonerLite") %>%
+  addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 1, color = ~numericPalette(pop_est)
+  )
+countriesPopMap
+```
+
+或者使用`colorQuantile()`。
+
+```{r}
+quantilePalette <- colorQuantile(palette="Greens", domain=countries$pop_est, n=7)
+countriesPopMap <- leaflet(data=countries) %>%
+  addProviderTiles("Stamen.TonerLite") %>%
+  addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 1, color = ~quantilePalette(pop_est)
+  )
+countriesPopMap
+```
+
+使用類別型變數**大陸(continent)**與`colorFactor()`作為著色的根據。
+
+```{r}
+factorPalette <- colorFactor(topo.colors(7), countries$continent)
+countriesContinentMap <- leaflet(data=countries) %>%
+  addProviderTiles("Stamen.TonerLite") %>%
+  addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 1, color = ~factorPalette(continent)
+  )
+countriesContinentMap
+```
+
 #### 圖例
+
+利用`addLegend()`加入圖例。
+
+```{r}
+quantilePalette <- colorQuantile(palette="Greens", domain=countries$pop_est, n=5)
+countriesPopMap <- leaflet(data=countries) %>%
+  addProviderTiles("Stamen.TonerLite") %>%
+  addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 1, color = ~quantilePalette(pop_est)
+  ) %>%
+  addLegend(position="bottomright", pal = quantilePalette, values = ~pop_est, opacity = 1, title="Population Quantile")
+countriesPopMap
+```
 
 #### 圖層
 
+使用`addLayersControl()`來製作控制面板。
+
+```{r}
+cities <- read.csv(textConnection("
+city,lat,lng,pop
+New Taipei,25.016028,121.462062,3966818
+Taipei,25.033141,121.559886,2702315
+Taichung,24.149360,120.669673,2719835
+Tainan,22.998952,120.226100,1884284
+Kaohsiung,22.626788,120.312617,2778992
+"))
+
+layeredMap <- leaflet(data=cities) %>% 
+  setView(lng = 121.081340, lat = 23.905183, zoom = 6) %>%
+  # tile groups
+  addTiles(group = "OpenStreetMap") %>%
+  addProviderTiles("Stamen.Toner", group = "Toner") %>%
+  addProviderTiles("Stamen.TonerLite", group = "Toner Lite") %>%
+  # Overlay groups
+  addCircles(lng = ~lng, lat = ~lat, weight = 1, radius = ~sqrt(pop) * 30, popup = ~sprintf("%s</br>%s ppl",city,pop), group="Population") %>%
+  # Layer controls
+  addLayersControl(
+    baseGroups = c("OpenStreetMap", "Toner", "Toner Lite"),
+    overlayGroups = c("Population"),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+layeredMap
+```
+
 ## Reference
-* R in Action, Robert I. Kabacoff
-* R Graphics Cookbook, Winston Chang
-* Leaflet for R
+* (Leaflet for R)[https://rstudio.github.io/leaflet/]
 
 &copy; Tony Yao-Jen Kuo 2015
