@@ -194,7 +194,26 @@ ggplot(accidentListNew, aes(x=年齡))+geom_histogram(binwidth=3, fill="red", co
 
 #### 函數圖Function Plot
 
+使用`stat_function()`與一個dummy資料集用來侷限X軸。
+
+```{r}
+dummyDF <- data.frame(xaxis=c(-5,5))#用來侷限X軸
+ggplot(dummyDF, aes(x=xaxis))+stat_function(fun=dnorm)
+```
+
+`fun=`可以指定自訂函數。
+
+```{r}
+customFunction <- function(xvar){
+  1/(1+exp(-xvar+10))
+}
+dummyDF <- data.frame(xaxis=c(0,20))#用來侷限X軸
+ggplot(dummyDF, aes(x=xaxis))+stat_function(fun=customFunction)
+```
+
 #### 熱圖Heat Map
+
+通常是
 
 #### 馬賽克圖Mosaic Plot
 
