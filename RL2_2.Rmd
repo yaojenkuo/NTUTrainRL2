@@ -213,9 +213,28 @@ ggplot(dummyDF, aes(x=xaxis))+stat_function(fun=customFunction)
 
 #### 熱圖Heat Map
 
-通常是
+通常需要兩個類別型or連續型變數作為坐標軸與一個連續型變數作為內容，利用`geom_tile()`或`geom_raster()`。
 
-#### 馬賽克圖Mosaic Plot
+```{r}
+presidentsRating <- readRDS('data/presidentsRating.rds')
+ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_raster()#More efficient
+#ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_tile()
+```
+
+使用`scale_#_continuous(breaks=...)`、`scale_#_reverse()`與`scale_fill_gradient2(...)`分別指定坐標軸的刻度、是否反轉與自訂顏色。
+
+```{r}
+ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_raster() + scale_x_continuous(breaks=seq(1940, 1976, by=4)) + scale_y_reverse() + scale_fill_gradient2(midpoint=50, mid="grey70", limits=c(0,100))
+```
+
+#### 其他:馬賽克圖Mosaic Plot from vcd
+
+使用於視覺畫類別型變數，觀察比例與組成。
+
+```{r}
+library(vcd)
+mosaic(HairEyeColor, shade=TRUE, legend=FALSE)#用一個table的示範資料集
+```
 
 ## Reference
 * R in Action, Robert I. Kabacoff
