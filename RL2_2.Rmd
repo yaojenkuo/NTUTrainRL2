@@ -116,7 +116,8 @@ ggplot(lineGraphData, aes(x=year, y=salaryReal)) + geom_line() + geom_point(size
 nthyear <- c(5, 6,  7, 8,	1,	2,	3,	4,	5,	6,	7,	8,	1,	2,	3,	4,	5,	6,	7)
 presidents <- c("李登輝", "李登輝", "李登輝", "李登輝", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九")
 lineGraphData <- data.frame(nthyear, salaryReal, presidents)
-ggplot(lineGraphData, aes(x=nthyear, y=salaryReal, colour=presidents))+geom_line(lwd=2)+geom_point(size=4)
+ggplot(lineGraphData, aes(x=nthyear, y=salaryReal, colour=presidents))+geom_line(lwd=2)+geom_point(size=4)#automatically assign colors
+ggplot(lineGraphData, aes(x=nthyear, y=salaryReal, colour=presidents))+geom_line(lwd=2)+geom_point(size=4)+scale_colour_manual(values = c("李登輝" = "goldenrod", "陳水扁" = "darkgreen", "馬英九" = "blue"))#custom colors
 ```
 
 ### 調整圖形的重要參數
@@ -236,9 +237,9 @@ ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_raster()#Mo
 ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_raster() + scale_x_continuous(breaks=seq(1940, 1976, by=4)) + scale_y_reverse() + scale_fill_gradient2(midpoint=50, mid="grey70", limits=c(0,100))
 ```
 
-#### 其他:馬賽克圖Mosaic Plot from vcd
+#### 其他
 
-使用於視覺畫類別型變數，觀察比例與組成。
+馬賽克圖Mosaic Plot from vcd，使用於視覺畫類別型變數，觀察比例與組成。
 
 ```{r}
 library(vcd)
