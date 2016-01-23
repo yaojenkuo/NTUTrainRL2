@@ -203,13 +203,13 @@ col.main="darkgreen")
 
 在`plot()`中使用`pch=#`與`cex=#`來選擇點的樣式與大小。
 
-![點的樣式](C:/NTUTrainRL2/image/pch.png)
+![點的樣式](image/pch.png)
 
 #### 線條的類型與寬度
 
 在`plot()`中使用`lty=#`與`lwd=#`來選擇線條的樣式與寬度。
 
-![線條的樣式](C:/NTUTrainRL2/image/lty.png)
+![線條的樣式](image/lty.png)
 
 #### 調整X軸或Y軸的數值間距與最大最小值
 
