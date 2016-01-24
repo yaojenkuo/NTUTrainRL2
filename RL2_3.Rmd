@@ -3,7 +3,7 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_3
 
 ## Geo Mapping
 
-我們要用Leftlet for R來做地圖資料探勘分析，Leaflet是眾多JavaScript套件中很受歡迎的互動式地圖，知名網站[The New York Times](http://www.nytimes.com/projects/elections/2013/nyc-primary/mayor/map.html)與[The Washington Post](http://www.washingtonpost.com/sf/local/2013/11/09/washington-a-world-apart/)都是使用Leaflet.js。而Leaflet for R讓R語言使用者能夠跳過撰寫JavaScript來使用它。
+我們要用Leaflet for R來做地圖資料探勘分析，Leaflet是眾多JavaScript套件中很受歡迎的互動式地圖，知名網站[The New York Times](http://www.nytimes.com/projects/elections/2013/nyc-primary/mayor/map.html)與[The Washington Post](http://www.washingtonpost.com/sf/local/2013/11/09/washington-a-world-apart/)都是使用Leaflet.js。而Leaflet for R讓R語言使用者能夠跳過撰寫JavaScript來使用它。
 
 ### Leaflet for R
 
@@ -26,6 +26,12 @@ helloMap
 
 # 如果你不習慣使用pipe run %>%
 helloMap <- addMarkers(addTiles(leaflet()), lng=121.539366, lat=25.017326, popup="National Taiwan University")
+helloMap
+
+# 陽春
+helloMap <- leaflet()
+helloMap <- addTiles(helloMap)
+helloMap <- addMarkers(helloMap,lng=121.539366, lat=25.017326, popup="National Taiwan University")
 helloMap
 ```
 
@@ -63,7 +69,7 @@ combineMap <- leaflet() %>%
   setView(lng = 121.539366, lat = 25.017326, zoom = 10) %>%
   addProviderTiles("Stamen.TonerLite") %>%
   addProviderTiles("Thunderforest.OpenCycleMap",
-    options = providerTileOptions(opacity = 0.5))
+    options = providerTileOptions(opacity = 0.3))
 combineMap
 ```
 
