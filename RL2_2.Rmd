@@ -163,7 +163,7 @@ ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()
 使用`+theme_bw()`更改為白色，`+theme_grey()`更改為預設。
 
 ```{r}
-ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+theme_bw()
+ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+theme_bw()+theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank())
 ```
 
 #### 圖例
@@ -227,7 +227,7 @@ ggplot(dummyDF, aes(x=xaxis))+stat_function(fun=customFunction)
 
 ```{r}
 presidentsRating <- readRDS('data/presidentsRating.rds')
-ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_raster()#More efficient
+ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_raster() + #More efficient
 #ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_tile()
 ```
 
@@ -239,7 +239,7 @@ ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_raster() + 
 
 #### 其他
 
-馬賽克圖Mosaic Plot from vcd，使用於視覺畫類別型變數，觀察比例與組成。
+馬賽克圖Mosaic Plot from vcd，使用於視覺化類別型變數，觀察比例與組成。
 
 ```{r}
 library(vcd)
