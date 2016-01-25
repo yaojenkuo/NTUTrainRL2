@@ -1,7 +1,7 @@
 # NTUTrainRL2_4
 This is the lecture notes for NTU Train Course of R Project Lecture 2_4
 
-## R Markdown and Shiny
+## R Markdown
 
 ### 什麼是Rmd?
 
@@ -33,13 +33,11 @@ R Markdown是一種編輯檔案格式(.Rmd)可以幫助使用者用R快速產生
 
 ### Rmd Syntax Basics
 
-https://github.com/yaojenkuo/NTUTrainRL2/blob/master/htmlOutput.Rmd
+[輸出為HTML](https://github.com/yaojenkuo/NTUTrainRL2/blob/master/htmlOutput.Rmd)
 
-https://github.com/yaojenkuo/NTUTrainRL2/blob/master/pdfOutput.Rmd
+[輸出為pdf](https://github.com/yaojenkuo/NTUTrainRL2/blob/master/pdfOutput.Rmd)
 
-### 什麼是Shiny?
-### Shiny基本應用
-### Shiny進階應用
+[輸出為slidy pdf](https://github.com/yaojenkuo/NTUTrainRL2/blob/master/slidyOutput.Rmd)
 
 ## Reference
 * R in Action, Robert I. Kabacoff
