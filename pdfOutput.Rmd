@@ -2,6 +2,8 @@
 title: "PDF Output"
 author: "Yao-Jen Kuo"
 date: "January 6, 2016"
+header-includes:
+   - \usepackage{bbm}
 output: 
   pdf_document
 ---
@@ -53,24 +55,41 @@ You may also specify `echo=FALSE` to prevent printing out `summary(cars)` comman
 summary(cars)
 ```
 
+Other options for R code chunks:
+
+* echo: (TRUE; logical)
+* results: ('markup'; character)
+  * markup
+  * asis
+  * hold
+  * hide
+* warning: (TRUE; logical)
+* error: (TRUE; logical)
+* message: (TRUE; logical)
+
 # Links
 
 [Click here to link to NTUCSIE Train](https://www.csie.ntu.edu.tw/train/)
 
 # Images
 
-![The Art of R Programming](http://freecomputerbooks.com/covers/The-Art-of-R-Programming-Matloff-Norman.jpg)
+![The Art of R Programming](C:/NTUTrainRL2/image/rRuperman.jpg)
 
 # Blockquotes
 
-Darth Vadar
 > I am your father.
 
-# LaTeX Equations
+Darth Vadar
+
+# Math Equations
 
 ## Inline equation
 
+The sum of squared deviations from the mean, $\sum \left( x - \bar{x} \right)^2$, is divided by the degrees of freedom, $n-1$
+
 ## Display equation
+
+As an example, the formula for sample variance:$$\large{ \sigma^2 = \frac { \sum_{i=1}^{n} \left( x_i - \bar{x} \right) ^ 2} {n-1} }$$
 
 # Horizontal Rule / Page Break
 
