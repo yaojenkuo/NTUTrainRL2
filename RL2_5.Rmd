@@ -10,8 +10,6 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_5
 ### Add Custom Controls
 
 ## Reference
-* R in Action, Robert I. Kabacoff
-* R Graphics Cookbook, Winston Chang
-* ggplot2 Essentials, Donato Teutonico
+* [Plotly R Library 2.0](https://plot.ly/r/)
 
-&copy; Tony Yao-Jen Kuo 2015
+&copy; Tony Yao-Jen Kuo 2016
