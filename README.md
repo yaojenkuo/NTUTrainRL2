@@ -13,7 +13,7 @@ https://github.com/yaojenkuo/NTUTrainRL2/blob/master/RL2_2.Rmd
 
 https://github.com/yaojenkuo/NTUTrainRL2/blob/master/RL2_3.Rmd
 
-## R Markdown and Shiny
+## R Markdown
 
 https://github.com/yaojenkuo/NTUTrainRL2/blob/master/RL2_4.Rmd
 
@@ -21,9 +21,17 @@ https://github.com/yaojenkuo/NTUTrainRL2/blob/master/RL2_4.Rmd
 
 https://github.com/yaojenkuo/NTUTrainRL2/blob/master/RL2_5.Rmd
 
+## Shiny
+
+https://github.com/yaojenkuo/NTUTrainRL2/blob/master/RL2_6.Rmd
+
 ## Reference
 * R in Action, Robert I. Kabacoff
 * R Graphics Cookbook, Winston Chang
-* ggplot2 Essentials, Donato Teutonico
+* R Graphs Cookbook, Hrishi V. Mittal
+* [Leaflet for R](https://rstudio.github.io/leaflet/)
+* [R Markdown v2](http://rmarkdown.rstudio.com/)
+* [Plotly R Library 2.0](https://plot.ly/r/)
+* [Shiny](http://shiny.rstudio.com/)
 
-&copy; Tony Yao-Jen Kuo 2015
+&copy; Tony Yao-Jen Kuo 2016
