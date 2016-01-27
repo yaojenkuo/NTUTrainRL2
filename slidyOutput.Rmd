@@ -1,0 +1,36 @@
+---
+title: "slidyOutput"
+author: "Yao-Jen Kuo"
+date: "January 26, 2016"
+output: slidy_presentation
+---
+
+## Slide with Bullets
+
+- Bullet 1
+    - Bullet 1.1
+    - Bullet 1.2
+- Bullet 2
+- Bullet 3
+
+## Slide with R Code and Output
+
+```{r}
+str(cars)
+dim(cars)
+```
+
+## Slide with Plot
+
+```{r}
+plot(cars)
+```
+
+## 有圖片的投影片
+
+- The Art of R Programming
+
+![The Art of R programming](image/rRuperman.jpg)
+
+## 有數學公式
+

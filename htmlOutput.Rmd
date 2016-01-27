@@ -1,0 +1,106 @@
+---
+title: "htmlOutput"
+author: "Yao-Jen Kuo"
+date: "January 26, 2016"
+output: 
+  html_document:
+    toc: true
+    number_sections: false
+    highlight: zenburn
+    theme: readable
+---
+
+# 這是標題1
+
+這是一個*斜體*。
+
+這是一個**粗體**。
+
+# 這是另外一個標題1
+
+## 這是標題2
+
+### 這是標題3
+
+# 清單
+
+## Bullet Points清單
+
+* 項目1
+* 項目2
+  * 項目2a
+  * 項目2b
+
+## 數字型清單
+
+1. 項目1
+2. 項目2
+  * 項目2a
+  * 項目2b
+
+# 程式碼區塊
+
+```
+print("Hello World!")
+```
+
+# R程式碼區塊
+
+```{r}
+plot(cars)
+```
+
+# 段落中程式碼與R程式碼區塊選項
+
+指定`echo=FALSE`就不會印出`summary(cars)`的程式碼區塊但還是會印出結果。
+
+```{r, echo=FALSE}
+summary(cars)
+```
+
+其他的選項:
+
+* echo: (TRUE; logical)
+* results: ('markup'; character)
+  * markup
+  * asis
+  * hold
+  * hide
+* warning: (TRUE; logical)
+* error: (TRUE; logical)
+* message: (TRUE; logical)
+
+# 連結
+
+[點此連結至系統訓練班網頁](https://www.csie.ntu.edu.tw/train/)
+
+# 圖片
+
+![The Art of R Programming](image/rRuperman.jpg)
+
+# 引用
+
+> 生命就像一盒巧克力。你永遠也不會知道你將拿到什麼。
+
+Forrest Gump
+
+# 水平線
+
+---
+
+# 數學運算式
+
+## 段落之中
+
+計算樣本變異數要將$\sum \left( x - \bar{x} \right)^2$除以自由度$n-1$。
+
+## 區塊
+
+樣本變異數的公式:$$\large{ \sigma^2 = \frac { \sum_{i=1}^{n} \left( x_i - \bar{x} \right) ^ 2} {n-1} }$$
+
+# 表格
+
+標題1 | 標題2 | 標題3
+--- | --- | ---
+A | B | C
+1 | 2 | 3

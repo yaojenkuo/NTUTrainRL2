@@ -37,8 +37,9 @@ This is a **bold**.
   * Item 2b
 
 # Plain Code Chunks
+
 ```
-This text is displayed verbatim / preformatted
+print("Hello World")
 ```
 
 # R Code Chunks
@@ -77,9 +78,9 @@ Other options for R code chunks:
 
 # Blockquotes
 
-> I am your father.
+> Life was like a box of chocolates. You never know what you're gonna get.
 
-Darth Vadar
+Forrest Gump
 
 # Math Equations
 
@@ -91,14 +92,13 @@ The sum of squared deviations from the mean, $\sum \left( x - \bar{x} \right)^2$
 
 As an example, the formula for sample variance:$$\large{ \sigma^2 = \frac { \sum_{i=1}^{n} \left( x_i - \bar{x} \right) ^ 2} {n-1} }$$
 
-# Horizontal Rule / Page Break
+# Horizontal Rule
 
 ---
 
 # Tables
 
-First Header  | Second Header
-------------- | -------------
-Content Cell  | Content Cell
-Content Cell  | Content Cell
-Reference Style Links and Images
+Header1 | Header2 | Header3
+--- | --- | ---
+A | B | C
+1 | 2 | 3
