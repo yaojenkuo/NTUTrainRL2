@@ -5,6 +5,119 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_5
 
 ### Hello Shiny!
 
+```{r}
+install.packages("shiny")
+library(shiny)
+runExample("01_hello")#有11個內建的範例
+```
+
+一個Shiny App會含有兩個程式:
+- ui.R
+- server.R
+
+像是**Hello Shiny!**這個範例的兩個程式為:
+
+**ui.R**
+
+```{r}
+#ui.R
+library(shiny)
+
+shinyUI(fluidPage(
+
+  titlePanel("Hello Shiny!"),
+
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("bins",
+                  "Number of bins:",
+                  min = 1,
+                  max = 50,
+                  value = 30)
+    ),
+
+    mainPanel(
+      plotOutput("distPlot")
+    )
+  )
+))
+```
+
+**server.R**
+
+```{r}
+#server.R
+library(shiny)
+
+shinyServer(function(input, output) {
+
+  output$distPlot <- renderPlot({
+    x    <- faithful[, 2]
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+  })
+})
+```
+
+模仿一個Hello World!
+
+```{r}
+setwd("C:/NTUTrainRL2")
+dir.create("HelloWorld")
+file.create("HelloWorld/ui.R")
+file.create("HelloWorld/server.R")
+```
+
+
+將以下的程式碼貼入`HelloWorld/ui.R`
+
+```{r}
+library(shiny)
+
+shinyUI(fluidPage(
+
+  titlePanel("Hello World!"),
+
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("bins",
+                  "Number of bins:",
+                  min = 5,
+                  max = 30,
+                  value = 15)#換最小最大與預設值
+    ),
+
+    mainPanel(
+      plotOutput("distPlot")
+    )
+  )
+))
+```
+
+
+將以下的程式碼貼入`HelloWorld/server.R`
+
+```{r}
+library(shiny)
+
+shinyServer(function(input, output) {
+
+  output$distPlot <- renderPlot({
+    x    <- faithful[, 2]
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+    hist(x, breaks = bins, col = 'skyblue', border = 'white')#換fill的顏色
+  })
+})
+```
+
+使用`runApp()`來執行HelloWorld App
+
+```{r}
+runApp("HelloWorld")
+```
+
 ### 設計介面
 
 ### 控制物件
