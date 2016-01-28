@@ -179,6 +179,12 @@ shinyUI(fluidPage(
 ))
 ```
 
+使用`runApp()`來執行FirstUI App
+
+```{r}
+runApp("FirstUI")
+```
+
 把FirstUI App加些有的沒有的。
 
 ```{r}
@@ -232,6 +238,12 @@ Leia has sent her most daring pilot on a secret mission to Jakku, where an old a
     )
   )
 ))
+```
+
+使用`runApp()`來執行FirstUI App
+
+```{r}
+runApp("FirstUI")
 ```
 
 ### 控制物件
@@ -356,7 +368,81 @@ shinyServer(function(input, output) {
 })
 ```
 
-### 動態輸出
+使用`runApp()`來執行BasicWidgets App
+
+```{r}
+runApp("BasicWidgets")
+```
+
+### 簡易動態輸出
+
+做一個文字動態輸出的練習ReactiveText。
+
+```{r}
+setwd("C:/NTUTrainRL2")
+dir.create("ReactiveText")
+file.create("ReactiveText/ui.R")
+file.create("ReactiveText/server.R")
+```
+
+在`mainPanel()`中加入2個`textOutput()`。
+
+將以下程式碼貼入`ReactiveText/ui.R`
+
+```{r}
+# ReactiveText/ui.R
+
+shinyUI(fluidPage(
+  titlePanel("Reactive Text"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      helpText("I am the King of Pirate!"),
+      
+      selectInput("role", 
+        label = "Choose a character to display",
+        choices = c("Monkey D. Luffy", "Roronoa Zoro",
+          "Vinsmoke Sanji", "Tony Tony Chopper"),
+        selected = "Monkey D. Luffy"),
+      
+      sliderInput("bounty", 
+        label = "Range of bounty:",
+        min = 0, max = 99999999, value = c(0, 99999999))
+    ),
+    
+    mainPanel(
+      textOutput("text1"),
+      textOutput("text2")
+    )
+  )
+))
+```
+
+將以下程式碼貼入`ReactiveText/server.R`
+
+```{r}
+# ReactiveText/server.R
+
+shinyServer(
+  function(input, output) {
+  
+    output$text1 <- renderText({ 
+      sprintf("I am %s. And I will be the King of Pirates!", input$role)
+    })
+    
+    output$text2 <- renderText({
+      sprintf("My bounty ranges from %s to %s.", input$bounty[1], input$bounty[2])
+    })
+    
+  }
+)
+```
+
+使用`runApp()`來執行ReactiveText App
+
+```{r}
+runApp("ReactiveText")
+```
 
 ### 實作
 
