@@ -1,5 +1,5 @@
-# NTUTrainRL2_5
-This is the lecture notes for NTU Train Course of R Project Lecture 2_5
+# NTUTrainRL2_6
+This is the lecture notes for NTU Train Course of R Project Lecture 2_6
 
 ## Shiny
 
@@ -21,7 +21,6 @@ runExample("01_hello")#有11個內建的範例
 
 ```{r}
 #ui.R
-library(shiny)
 
 shinyUI(fluidPage(
 
@@ -47,7 +46,6 @@ shinyUI(fluidPage(
 
 ```{r}
 #server.R
-library(shiny)
 
 shinyServer(function(input, output) {
 
@@ -60,7 +58,7 @@ shinyServer(function(input, output) {
 })
 ```
 
-模仿一個Hello World!
+模仿一個Hello World
 
 ```{r}
 setwd("C:/NTUTrainRL2")
@@ -73,7 +71,7 @@ file.create("HelloWorld/server.R")
 將以下的程式碼貼入`HelloWorld/ui.R`
 
 ```{r}
-library(shiny)
+# HelloWorld/ui.R
 
 shinyUI(fluidPage(
 
@@ -99,7 +97,7 @@ shinyUI(fluidPage(
 將以下的程式碼貼入`HelloWorld/server.R`
 
 ```{r}
-library(shiny)
+# HelloWorld/server.R
 
 shinyServer(function(input, output) {
 
@@ -118,7 +116,109 @@ shinyServer(function(input, output) {
 runApp("HelloWorld")
 ```
 
-### 設計介面
+### 設計使用者介面
+
+從頭開始設計Shiny的使用者介面FirstUI。
+
+```{r}
+setwd("C:/NTUTrainRL2")
+dir.create("FirstUI")
+file.create("FirstUI/ui.R")
+file.create("FirstUI/server.R")
+```
+
+- 使用`fluidPage()`來做一個RWD的介面
+- 將以下程式碼貼入`FirstUI/ui.R`
+
+```{r}
+# FirstUI/ui.R
+
+shinyUI(fluidPage(
+  titlePanel("Title"),
+
+  sidebarLayout(
+    sidebarPanel( "Sidebar"),
+    mainPanel("Main")
+  )
+))
+```
+
+將以下程式碼貼入`FirstUI/server.R`
+
+```{r}
+# FirstUI/server.R
+
+shinyServer(function(input, output) {
+})
+```
+
+使用`runApp()`來執行FirstUI App
+
+```{r}
+runApp("FirstUI")
+```
+
+在剛剛的範例中我們在`fluidPage()`加入了
+- `titlePanel()`
+- `sidebarLayout()`
+  - `sidebarPanel()`
+  - `mainPanel()`
+
+我們修改一下`sidebarLayout()`的選項把`sidebarPanel()`從左邊移到右邊。
+
+```{r}
+# FirstUI/ui.R
+
+shinyUI(fluidPage(
+  titlePanel("Title"),
+
+  sidebarLayout(position="right",
+    sidebarPanel( "Sidebar"),
+    mainPanel("Main")
+  )
+))
+```
+
+把FirstUI App再加些有的沒有的
+
+```{r}
+# FirstUI/ui.R
+
+shinyUI(fluidPage(
+  titlePanel("My StarWars App"),
+  sidebarLayout(
+    sidebarPanel(
+      h2("Installation"),
+      strong("The Force "),
+      span("is available everywhere, you can install it in the usual way from your R console:"),
+      code('install.packages("TheForce")'),
+      br(),
+      br(),
+      br(),
+      br(),
+      img(src = "Star_Wars_Logo.png", height = 72, width = 72),
+      "The Force is Strong with this one ", 
+        span("Star Wars", style = "color:blue")
+    ),
+    mainPanel(
+      h1("Introducing StarWars"),
+      p("Shiny is a new package from RStudio that makes it ", 
+        em("incredibly easy"), 
+        " to build interactive web applications with R."),
+      br(),
+      p("For an introduction and live examples, visit the ",
+        a("Shiny homepage.", 
+          href = "http://www.rstudio.com/shiny")),
+      br(),
+      h2("Features"),
+      p("* Build useful web applications with only a few lines of code—no JavaScript required."),
+      p("* Shiny applications are automatically “live” in the same way that ", 
+        strong("spreadsheets"),
+        " are live. Outputs change instantly as users modify inputs, without requiring a reload of the browser.")
+    )
+  )
+))
+```
 
 ### 控制物件
 
