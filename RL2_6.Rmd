@@ -179,7 +179,7 @@ shinyUI(fluidPage(
 ))
 ```
 
-把FirstUI App再加些有的沒有的
+把FirstUI App加些有的沒有的。
 
 ```{r}
 # FirstUI/ui.R
@@ -235,6 +235,126 @@ Leia has sent her most daring pilot on a secret mission to Jakku, where an old a
 ```
 
 ### 控制物件
+
+控制物件是跟圖表互動的工具，讓我們用一個BasicWidgets App把所有的基本控制物件秀出來。
+
+```{r}
+setwd("C:/NTUTrainRL2")
+dir.create("BasicWidgets")
+file.create("BasicWidgets/ui.R")
+file.create("BasicWidgets/server.R")
+```
+
+- `fluidRow()`是Boostrap的排版，用12欄平分版面
+- 控制物件一覽
+  - 按鈕
+    - 動作按鈕`actionButton()`
+    - 送出按鈕`submitButton()`
+  - 勾選箱`checkboxInput()`
+  - 群組勾選箱`checkboxGroupInput()`
+  - 輸入日期`dateInput()`
+  - 輸入日期範圍`dateRangeInput()`
+  - 上傳檔案`fileInput()`
+  - 提示文字`helpText()`
+  - 輸入數字`numericInput()`
+  - 單選鈕`radioButtons()`
+  - 下拉式選單`selectInput()`
+  - 滑桿`sliderInput()`
+  - 輸入文字`textInput()`
+
+每一個控制物件都有兩個選項:
+- 名稱
+- 標籤
+
+將以下程式碼貼入`BasicWidgets/ui.R`
+
+```{r}
+# BasicWidgets/ui.R
+
+shinyUI(fluidPage(
+  titlePanel("Basic widgets"),
+  
+  fluidRow(
+    
+    column(3,
+      h3("Buttons"),
+      actionButton("action", label = "Action"),
+      br(),
+      br(), 
+      submitButton("Submit")),
+    
+    column(3,
+      h3("Single checkbox"),
+      checkboxInput("checkbox", label = "Choice A", value = TRUE)),
+    
+    column(3, 
+      checkboxGroupInput("checkGroup", 
+        label = h3("Checkbox group"), 
+        choices = list("Choice 1" = 1, 
+           "Choice 2" = 2, "Choice 3" = 3),
+        selected = 1)),
+    
+    column(3, 
+      dateInput("date", 
+        label = h3("Date input"), 
+        value = "2014-01-01"))   
+  ),
+  
+  fluidRow(
+    
+    column(3,
+      dateRangeInput("dates", label = h3("Date range"))),
+    
+    column(3,
+      fileInput("file", label = h3("File input"))),
+    
+    column(3, 
+      h3("Help text"),
+      helpText("Note: help text isn't a true widget,", 
+        "but it provides an easy way to add text to",
+        "accompany other widgets.")),
+    
+    column(3, 
+      numericInput("num", 
+        label = h3("Numeric input"), 
+        value = 1))   
+  ),
+    
+  fluidRow(
+    
+    column(3,
+      radioButtons("radio", label = h3("Radio buttons"),
+        choices = list("Choice 1" = 1, "Choice 2" = 2,
+                       "Choice 3" = 3),selected = 1)),
+    
+    column(3,
+      selectInput("select", label = h3("Select box"), 
+        choices = list("Choice 1" = 1, "Choice 2" = 2,
+                       "Choice 3" = 3), selected = 1)),
+    
+    column(3, 
+      sliderInput("slider1", label = h3("Sliders"),
+        min = 0, max = 100, value = 50),
+      sliderInput("slider2", "",
+        min = 0, max = 100, value = c(25, 75))
+      ),
+    
+    column(3, 
+      textInput("text", label = h3("Text input"), 
+        value = "Enter text..."))   
+  )
+
+))
+```
+
+將以下程式碼貼入`BasicWidgets/server.R`
+
+```{r}
+# BasicWidgets/server.R
+
+shinyServer(function(input, output) {
+})
+```
 
 ### 動態輸出
 
