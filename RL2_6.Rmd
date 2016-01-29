@@ -9,6 +9,16 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_6
 install.packages("shiny")
 library(shiny)
 runExample("01_hello")#有11個內建的範例
+#runExample("02_text") # tables and data frames
+#runExample("03_reactivity") # a reactive expression
+#runExample("04_mpg") # global variables
+#runExample("05_sliders") # slider bars
+#runExample("06_tabsets") # tabbed panels
+#runExample("07_widgets") # help text and submit buttons
+#runExample("08_html") # Shiny app built from HTML
+#runExample("09_upload") # file upload wizard
+#runExample("10_download") # file download wizard
+#runExample("11_timer") # an automated timer
 ```
 
 一個Shiny App會含有兩個程式:
@@ -444,7 +454,93 @@ shinyServer(
 runApp("ReactiveText")
 ```
 
-### 實作
+### 資料集與Shiny
+
+我們模仿在Shiny上畫一個[Wall Street Journal India](http://blogs.wsj.com/indiarealtime/2015/09/23/why-delhi-is-the-most-expensive-place-to-buy-rice-in-the-world-but-among-the-cheapest-cities-to-live-in/)的Reactive長條圖。
+
+```{r}
+setwd("C:/NTUTrainRL2")
+dir.create("wsjIndia")
+dir.create("wsjIndia/data")
+file.create("wsjIndia/ui.R")
+file.create("wsjIndia/server.R")
+```
+
+把原始資料data-CAOyC.csv複製到C:/NTUTrainRL2/wsjIndia/data目錄下之後，將以下程式碼貼入`wsjIndia/ui.R`
+
+```{r}
+# wsjIndia/ui.R
+
+# Read dataset
+dataset <- read.csv("data/data-CAOyC.csv")
+
+# Transfer dataset into a matrix
+rowName <- dataset[,1]
+dataset <- dataset[,c(2:7)]
+datasetMat <- data.matrix(dataset)
+rownames(datasetMat) <- rowName
+
+# Define the overall UI
+shinyUI(
+  # Use a fluid Bootstrap layout
+  fluidPage(    
+    # Give the page a title
+    titlePanel("Cost of Living"),
+    # Generate a row with a sidebar
+    sidebarLayout(      
+      # Define the sidebar with one input
+      sidebarPanel(
+        selectInput("dimension", "Aspects of Cost:", 
+                    choices=colnames(datasetMat)),
+        br(),
+        helpText("Data from WSJ India.")
+      ),
+      # Create a spot for the barplot
+      mainPanel(
+        plotOutput("barPlot")  
+      )
+    )
+  )
+)
+```
+
+將以下程式碼貼入`wsjIndia/server.R`
+
+```{r}
+# wsjIndia/server.R
+
+# Read dataset
+dataset <- read.csv("data/data-CAOyC.csv")
+
+# Transfer dataset into a matrix
+rowName <- dataset[,1]
+dataset <- dataset[,c(2:7)]
+datasetMat <- data.matrix(dataset)
+rownames(datasetMat) <- rowName
+
+# Define a server for the Shiny app
+shinyServer(function(input, output) {
+  # Fill in the spot we created for a plot
+  output$barPlot <- renderPlot({
+    # Render a barplot
+    par(las=2)
+    barplot(sort(datasetMat[,input$dimension]),
+            col="skyblue",
+            border=NA,
+            main=input$dimension,
+            xlab="Hour/Minute/Dollar",
+            horiz=TRUE,
+            cex.names=0.6
+            )
+  })
+})
+```
+
+使用`runApp()`來執行wsjIndia App
+
+```{r}
+runApp("wsjIndia")
+```
 
 ### 上傳
 
