@@ -542,7 +542,39 @@ shinyServer(function(input, output) {
 runApp("wsjIndia")
 ```
 
-### 上傳
+### 分享Shiny App
+
+使用[shinyapps.io by RStudio](https://www.shinyapps.io/)分享是最簡單的方法，這是Rstudio提供的主機服務。
+
+* 安裝`devtools`與`rsconnect`
+
+```{r}
+install.packages("devtools")
+devtools::install_github('rstudio/rsconnect')
+library(rsconnect)
+```
+
+* 申請一個shinyapps.io帳號
+
+* 設定`rsconnect`
+
+Shinyapps.io自動會幫每個帳號產生一組token與secret，用來告訴rsconnect把在RStudio開發好的Shiny App連結到你的帳戶，點擊右上角帳戶名稱後點選Tokens
+
+![Tokens](image/shiny01.png)
+
+![Tokens](image/shiny01.png)
+
+* 在Rstudio的Console執行這段程式就完成了，三個參數都要填入在Tokens畫面點選Show之後顯示的資訊。
+
+```{r}
+rsconnect::setAccountInfo(name="<ACCOUNT>", token="<TOKEN>", secret="<SECRET>")
+```
+
+使用`runApp()`來執行wsjIndia App然後點選Publish。
+
+```{r}
+runApp("wsjIndia")
+```
 
 ## Reference
 * [Shiny](http://shiny.rstudio.com/)
