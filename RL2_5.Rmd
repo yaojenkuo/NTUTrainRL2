@@ -56,10 +56,50 @@ fourthPlotly
 ### 不一定要data frame
 
 ```{r}
+class(volcano)
+fifthPlotly <- plot_ly(z = volcano, type = "surface")
+fifthPlotly
 
+sixthPlotly <- plot_ly(z = volcano, type = "contour")
+sixthPlotly
 ```
 
-### Add Custom Controls
+### 顏色參數
+
+```{r}
+#先整理一下資料集
+fiveCities <- read.table("data/fiveCities.csv", sep=",", header=T)
+popIncreaseMelted <- melt(fiveCities[,1:6], id.vars="year", variable.name = "city", value.name="popIncrease")
+unemployMelted <- melt(fiveCities[, c(1, 7:11)], id.vars="year", variable.name = "city", value.name="unemploy")
+city <- gsub("_popIncrease", "", popIncreaseMelted$city)
+fiveCitiesMelted <- data.frame(city, popIncreaseMelted[,c(1,3)], unemployMelted$unemploy)
+colnames(fiveCitiesMelted) <- c("city", "year", "popIncreaseRate", "unemploymentRate")
+```
+
+使用`color=`可以依類別著色。
+
+```{r}
+seventhPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, color = city, mode = "markers")
+seventhPlotly
+```
+
+也可以依數值著色。
+
+```{r}
+eighthPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, color = unemploymentRate, mode = "markers")
+eighthPlotly
+```
+
+以及用`colors=`指定調色盤，調色盤的名稱可以參考[這個連結](http://isu.r-forge.r-project.org/vistat/2013-04-08-plotting-symbols-and-color-palettes/brewer-pal.png)。
+
+```{r}
+ninthPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, color = unemploymentRate, colors="Greens", mode = "markers")
+ninthPlotly
+```
+
+### 
+
+
 
 ## Reference
 * [Plotly R Library 2.0](https://plot.ly/r/)
