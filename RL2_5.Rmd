@@ -97,7 +97,123 @@ ninthPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRa
 ninthPlotly
 ```
 
-### 
+### 標記參數
+
+除了用顏色區別不同的類別，也可以用`symbol=`區別。
+
+```{r}
+tenthPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, symbol = city, mode = "markers")
+tenthPlotly
+```
+
+### 交叉類別子圖形
+
+記得ggplot2介紹的facet嗎? `group=`與`subplot()`就可以做出來。
+
+```{r}
+eleventhPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, group = city, xaxis = paste0("x", city), mode = "markers") %>% 
+  subplot()
+eleventhPlotly
+```
+
+統一每個子圖形的x軸與y軸。
+
+```{r}
+twelvethPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, group = city, yaxis = paste0("y", city), mode = "markers") %>% 
+  layout(
+    xaxis = list(range = range(popIncreaseRate) + c(-1, 1)),
+    yaxis = list(range = range(unemploymentRate) + c(-1, 1))
+    ) %>%
+  subplot()
+twelvethPlotly
+```
+
+### 氣泡圖
+
+在散佈圖多加一個`size=`就可以。
+
+```{r}
+thirteenthPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, group = city, mode = "markers", size=unemploymentRate)
+thirteenthPlotly
+```
+
+### 長條圖
+
+使用`type = "bar"`。
+
+```{r}
+fourteenthPlotly <- plot_ly(
+  employment,
+  x=as.character(year),
+  y=unemploymentRate,
+  type="bar"
+)
+fourteenthPlotly
+```
+
+或者做一個堆疊長條圖。
+
+```{r}
+fifteenthPlotly <- plot_ly(
+  fiveCitiesMelted,
+  x=as.character(year),
+  y=unemploymentRate,
+  group=city,
+  type="bar"
+) %>%
+  layout(barmode = "stack")
+fifteenthPlotly
+```
+
+### 直方圖
+
+使用`type = "histogram"`。
+
+```{r}
+sixteenthPlotly <- plot_ly(
+  fiveCitiesMelted,
+  x=unemploymentRate,
+  type="histogram",
+  nbinsx=20
+)
+sixteenthPlotly
+```
+
+使用`barmode="overlay"`堆疊直方圖。
+
+```{r}
+attach(fiveCitiesMelted)
+unemployFirstPeriod <- fiveCitiesMelted[year<2007,]
+unemployFirstPeriod <- unemployFirstPeriod[, 4]
+unemploySecondPeriod <- fiveCitiesMelted[year>=2007,]
+unemploySecondPeriod <- unemploySecondPeriod[, 4]
+detach(fiveCitiesMelted)
+
+seventeenthPlotly <- plot_ly(
+  x=unemployFirstPeriod,
+  type="histogram",
+  opacity=0.4,
+  name="1998-2006",
+  nbinsx=20
+) %>%
+  add_trace(
+    x=unemploySecondPeriod,
+    name="2007-2014"
+  ) %>%
+  layout(barmode="overlay")
+seventeenthPlotly
+```
+
+### 盒鬚圖
+
+使用`type = "box"`。
+
+```{r}
+eighteenthPlotly <- plot_ly(fiveCitiesMelted, y = unemploymentRate, color = city, type = "box")
+eighteenthPlotly
+```
+
+### 熱圖
 
 
 
