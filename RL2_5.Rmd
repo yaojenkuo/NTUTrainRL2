@@ -3,9 +3,61 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_5
 
 ## Plotly
 
-### Basic Charts
+RStudio使用者需要下載最新版本的[RStudio](https://www.rstudio.com/products/rstudio/download/)。
 
-### Statistical Charts
+```{r}
+install.packages("plotly")
+library(plotly)
+```
+
+### 第一個Plotly圖
+
+```{r}
+setwd("C:/NTUTrainRL2")
+employment <- read.table("data/employmentTW.csv", sep=",", header=T)
+employment <- transform(
+  employment,
+  unemploymentRate = (workingPopInThousand-employedPopInThousand)/workingPopInThousand
+)
+firstPlotly <- plot_ly(employment, x = year, y = unemploymentRate)
+firstPlotly
+```
+
+### 練習使用`type=`與`mode=`
+
+在`mode=`中可以用`+`號結合`lines`、`markers`與`text`。
+
+```{r}
+secondPlotly <- plot_ly(employment, x = year, y = unemploymentRate, type = "scatter", mode = "markers")
+secondPlotly
+```
+
+### 加上LOESS平滑線
+
+使用`add_trace()`函數。
+
+```{r}
+smoothLine <- loess(unemploymentRate ~ year, data = employment)
+thirdPlotly <- plot_ly(employment, x=year, y=unemploymentRate, name="raw data", mode="markers+lines") %>%
+  add_trace(y=fitted(smoothLine), name="loess", mode="lines")
+thirdPlotly
+```
+
+### 隱藏圖例
+
+使用`layout()`函數。
+
+```{r}
+fourthPlotly <- thirdPlotly %>%
+  layout(showlegend = FALSE)
+fourthPlotly
+```
+
+### 不一定要data frame
+
+```{r}
+
+```
 
 ### Add Custom Controls
 
