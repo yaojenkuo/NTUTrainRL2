@@ -215,7 +215,13 @@ eighteenthPlotly
 
 ### 熱圖
 
+使用`type = "heatmap"`
 
+```{r}
+presidentsRating <- readRDS('data/presidentsRating.rds')
+ninteenthPlotly <- plot_ly(presidentsRating, z = rating, x = year, y = quarter, type = "heatmap")
+ninteenthPlotly
+```
 
 ## Reference
 * [Plotly R Library 2.0](https://plot.ly/r/)
