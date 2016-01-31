@@ -69,6 +69,7 @@ sixthPlotly
 ```{r}
 #先整理一下資料集
 fiveCities <- read.table("data/fiveCities.csv", sep=",", header=T)
+library(reshape2)
 popIncreaseMelted <- melt(fiveCities[,1:6], id.vars="year", variable.name = "city", value.name="popIncrease")
 unemployMelted <- melt(fiveCities[, c(1, 7:11)], id.vars="year", variable.name = "city", value.name="unemploy")
 city <- gsub("_popIncrease", "", popIncreaseMelted$city)
@@ -79,7 +80,7 @@ colnames(fiveCitiesMelted) <- c("city", "year", "popIncreaseRate", "unemployment
 使用`color=`可以依類別著色。
 
 ```{r}
-seventhPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, color = city, mode = "markers")
+seventhPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, color=city ,mode = "markers")
 seventhPlotly
 ```
 
@@ -88,6 +89,9 @@ seventhPlotly
 ```{r}
 eighthPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, color = unemploymentRate, mode = "markers")
 eighthPlotly
+
+eighthPlusPlotly <- plot_ly(mtcars, x = mpg, y = disp, color = hp, mode = "markers")
+eighthPlusPlotly
 ```
 
 以及用`colors=`指定調色盤，調色盤的名稱可以參考[這個連結](http://isu.r-forge.r-project.org/vistat/2013-04-08-plotting-symbols-and-color-palettes/brewer-pal.png)。
@@ -135,6 +139,9 @@ twelvethPlotly
 ```{r}
 thirteenthPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, group = city, mode = "markers", size=unemploymentRate)
 thirteenthPlotly
+
+thirteenthPlusPlotly <- plot_ly(mtcars, x = mpg, y = disp, mode = "markers", color=hp, size=wt)
+thirteenthPlusPlotly
 ```
 
 ### 長條圖

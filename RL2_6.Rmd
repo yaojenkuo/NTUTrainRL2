@@ -93,7 +93,7 @@ shinyUI(fluidPage(
                   "Number of bins:",
                   min = 5,
                   max = 30,
-                  value = 15)#換最小最大與預設值
+                  value = 15)#change min/max/default
     ),
 
     mainPanel(
@@ -115,7 +115,7 @@ shinyServer(function(input, output) {
     x    <- faithful[, 2]
     bins <- seq(min(x), max(x), length.out = input$bins + 1)
 
-    hist(x, breaks = bins, col = 'skyblue', border = 'white')#換fill的顏色
+    hist(x, breaks = bins, col = 'skyblue', border = 'white')#change col
   })
 })
 ```
@@ -544,7 +544,7 @@ runApp("wsjIndia")
 
 ### 分享Shiny App
 
-使用[shinyapps.io by RStudio](https://www.shinyapps.io/)分享是最簡單的方法，這是Rstudio提供的主機服務。
+使用[shinyapps.io by RStudio](https://www.shinyapps.io/)分享是最簡單的方法，這是RStudio提供的主機服務。
 
 * 安裝`devtools`與`rsconnect`
 
@@ -567,7 +567,7 @@ Shinyapps.io自動會幫每個帳號產生一組token與secret，用來告訴rsc
 * 在Rstudio的Console執行這段程式就完成了，三個參數都要填入在Tokens畫面點選Show之後顯示的資訊。
 
 ```{r}
-rsconnect::setAccountInfo(name="<ACCOUNT>", token="<TOKEN>", secret="<SECRET>")
+rsconnect::setAccountInfo(name='yaojenkuo', token='C78DF668EE134F538EC050A2DA6CEDA7', secret='9JpGahAHVlmIRP1CYp9wApTCB/YFckvcMnsgefrC')
 ```
 
 使用`runApp()`來執行wsjIndia App然後點選Publish。

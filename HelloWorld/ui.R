@@ -10,7 +10,7 @@ shinyUI(fluidPage(
                   "Number of bins:",
                   min = 5,
                   max = 30,
-                  value = 15)#change min/max/default values
+                  value = 15)#change min/max/default
     ),
 
     mainPanel(

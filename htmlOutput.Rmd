@@ -28,8 +28,8 @@ output:
 
 * 項目1
 * 項目2
-  * 項目2a
-  * 項目2b
+    * 項目2a
+    * 項目2b
 
 ## 數字型清單
 
@@ -54,7 +54,7 @@ plot(cars)
 
 指定`echo=FALSE`就不會印出`summary(cars)`的程式碼區塊但還是會印出結果。
 
-```{r, echo=FALSE}
+```{r}
 summary(cars)
 ```
 
@@ -62,10 +62,10 @@ summary(cars)
 
 * echo: (TRUE; logical)
 * results: ('markup'; character)
-  * markup
-  * asis
-  * hold
-  * hide
+    * markup
+    * asis
+    * hold
+    * hide
 * warning: (TRUE; logical)
 * error: (TRUE; logical)
 * message: (TRUE; logical)

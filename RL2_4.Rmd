@@ -37,7 +37,7 @@ R Markdown是一種編輯檔案格式(.Rmd)可以幫助使用者用R快速產生
 
 [輸出為pdf](https://github.com/yaojenkuo/NTUTrainRL2/blob/master/pdfOutput.Rmd)
 
-[輸出為slidy pdf](https://github.com/yaojenkuo/NTUTrainRL2/blob/master/slidyOutput.Rmd)
+[輸出為slidy](https://github.com/yaojenkuo/NTUTrainRL2/blob/master/slidyOutput.Rmd)
 
 ## Reference
 * [R Markdown v2](http://rmarkdown.rstudio.com/)

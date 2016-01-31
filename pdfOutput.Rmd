@@ -26,8 +26,8 @@ This is a **bold**.
 
 * Item 1
 * Item 2
-  * Item 2a
-  * Item 2b
+    * Item 2a
+    * Item 2b
 
 ## Ordered List
 
@@ -60,10 +60,10 @@ Other options for R code chunks:
 
 * echo: (TRUE; logical)
 * results: ('markup'; character)
-  * markup
-  * asis
-  * hold
-  * hide
+    * markup
+    * asis
+    * hold
+    * hide
 * warning: (TRUE; logical)
 * error: (TRUE; logical)
 * message: (TRUE; logical)

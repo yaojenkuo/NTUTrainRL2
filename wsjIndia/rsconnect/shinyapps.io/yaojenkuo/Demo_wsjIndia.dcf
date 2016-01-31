@@ -1,9 +1,9 @@
 name: Demo_wsjIndia
 account: yaojenkuo
 server: shinyapps.io
-appId: 80809
-bundleId: 361372
+appId: 81155
+bundleId: 362535
 url: https://yaojenkuo.shinyapps.io/Demo_wsjIndia/
-when: 1454080170.99324
+when: 1454238301.09788
 asMultiple: FALSE
 asStatic: FALSE
