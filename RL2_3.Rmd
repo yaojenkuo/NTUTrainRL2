@@ -92,7 +92,7 @@ stores <- read.table("C:/NTUTrainRL2/data/stores711inTP.csv", header=T, sep=",",
 
 markers711 <- leaflet(data=stores) %>%
   addTiles() %>%
-  addMarkers(~lng, ~lat, popup=~as.character(popups2))
+  addMarkers(~lng, ~lat, popup=~as.character(popups1))
 markers711
 ```
 
