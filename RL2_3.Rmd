@@ -101,7 +101,7 @@ markers711
 ```{r}
 markers711 <- leaflet(data=stores) %>%
   addTiles() %>%
-  addMarkers(~lng, ~lat, popup=~as.character(popups2), icon = list(iconUrl = "C:/NTUTrainRL2/image/711_logo.gif", iconSize = c(20, 20)))
+  addMarkers(~lng, ~lat, popup=~as.character(popups1), icon = list(iconUrl = "C:/NTUTrainRL2/image/711_logo.gif", iconSize = c(20, 20)))
 markers711
 ```
 
