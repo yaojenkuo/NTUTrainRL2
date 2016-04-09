@@ -38,8 +38,8 @@ secondPlotly
 
 ```{r}
 smoothLine <- loess(unemploymentRate ~ year, data = employment)
-thirdPlotly <- plot_ly(employment, x=year, y=unemploymentRate, name="raw data", mode="markers+lines") %>%
-  add_trace(y=fitted(smoothLine), name="loess", mode="lines")
+thirdPlotly <- plot_ly(employment, x=year, y=unemploymentRate, name="raw data", mode = "lines")
+thirdPlotly <- add_trace(thirdPlotly, x=year, y=fitted(smoothLine), name="loess", mode = "lines")
 thirdPlotly
 ```
 
@@ -89,9 +89,6 @@ seventhPlotly
 ```{r}
 eighthPlotly <- plot_ly(fiveCitiesMelted, x = popIncreaseRate, y = unemploymentRate, color = unemploymentRate, mode = "markers")
 eighthPlotly
-
-eighthPlusPlotly <- plot_ly(mtcars, x = mpg, y = disp, color = hp, mode = "markers")
-eighthPlusPlotly
 ```
 
 以及用`colors=`指定調色盤，調色盤的名稱可以參考[這個連結](http://isu.r-forge.r-project.org/vistat/2013-04-08-plotting-symbols-and-color-palettes/brewer-pal.png)。
