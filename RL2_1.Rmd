@@ -1,6 +1,17 @@
 # NTUTrainRL2_1
 This is the lecture notes for NTU Train Course of R Project Lecture 2_1
 
+## Introduction
+
+在這門課程裡面我們會介紹以下幾種畫圖/Presentation的功能:
+
+- R Base Plotting System
+- ggplot2
+- leaflet for R
+- R Markdown
+- Plotly
+- Shiny
+
 ## R Base Plotting System
 
 不需要額外安裝套件就可以畫圖。
@@ -11,71 +22,88 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_1
 setwd("C:/NTUTrainRL2")
 Sys.setlocale(category = "LC_ALL", locale = "cht")
 accidentList <- readRDS('data/accidentList.rds')
-colnames(accidentList) <- c("醫院所在縣市別", "醫院別", "性別", "國籍別", "年齡", "醫療檢傷", "救護檢傷")
 summary(accidentList)#看到一筆101歲的極端值，好像不太對
-accidentListNew <- subset(accidentList, 年齡!=101 | is.na(年齡))#使用一下subset()函數!
+accidentListNew <- subset(accidentList, age!=101)#使用subset()函數將年齡為101的資料剔除
 ```
 
 ### 長條圖bar plot
 
-以圖形高度代表資料量的統計圖形，主要用來處理離散型資料。
+以圖形高度代表資料量的統計圖形，主要用來處理離散型資料，使用`barplot()`。
+
+```{r}
+?barplot
+barplot(table(accidentListNew[ ,"county"]), main = "醫院所在縣市", xlab = "縣市別", ylab = "病患人數")
+```
+
+練習:針對國籍`nationality`繪製長條圖。
+
+```{r}
+# 針對國籍`nationality`繪製長條圖
+
+```
+
+利用`par(mfrow=c(m, n))`可以將畫布排版成`m x n`。
 
 ```{r}
 par(mfrow=c(3,2))
 barPlots <- function(){
   variables <- names(accidentListNew[, c(-2, -5)])
   for (name in variables){
-    barplot(table(accidentListNew[ ,name]), main=paste("依",name), ylab="人數")
+    barplot(table(accidentListNew[ ,name]), main=paste("依", name, "的人數統計"), xlab = name, ylab = "人數")
   }
 }
 barPlots()
-barplot(table(accidentListNew$醫院別), main="依醫院別", ylab="人數", las=2)
-
-# 只畫一張
-par(mfrow=c(1,1))
-barplot(table(accidentListNew[ ,"醫院所在縣市別"]))
+barplot(table(accidentListNew$hospital), main = "依醫院別", ylab = "人數", las = 2)
 ```
 
 ### 直方圖histogram
 
-觀察連續型資料的分布。
+觀察連續型資料的分布，主要用來處理連續型資料，我們的資料集中只有一個連續型資料`age`，使用`hist()`。
 
 ```{r}
 par(mfrow=c(1,1))
-hist(na.omit(accidentListNew$年齡), xlab="年齡", ylab="密度",  main="依年齡", breaks=15, col="skyblue", freq=FALSE, ylim=c(0, 0.12))
-rug(jitter(accidentListNew$年齡))#在X軸上顯示資料密度
-lines(density(accidentListNew$年齡, na.rm=TRUE), col="red", lwd=2)#hist的freq要設為false才看得到
+?hist
+hist(na.omit(accidentListNew$age), xlab="年齡", ylab="密度",  main="年齡分布", col="skyblue", freq=FALSE, ylim=c(0, 0.12))
+rug(jitter(accidentListNew$age))#在X軸上顯示資料密度
+lines(density(accidentListNew$age, na.rm=TRUE), col="red", lwd=2)#hist的freq要設為false才看得到
+```
 
-hist(na.omit(accidentListNew$年齡))
+練習:針對年齡`age`繪製直方圖，不需要標示資料密度與密度曲線，指派`freq = TRUE`並修改`ylim`
+
+```{r}
+# 針對年齡`age`繪製直方圖
+
 ```
 
 ### 盒鬚圖boxplot
 
-顯示數據分布情況包含最大值、最小值、中位數、下四分位數及上四分位數。
+與直方圖功能類似，可以顯示數據分布情況包含最大值、最小值、中位數、下四分位數及上四分位數，但是可以用類別變數區隔，顯示數值在不同類別中的分布情況。
+
+```{r}
+?boxplot
+par(mfrow=c(1,1))
+boxplot(age ~ accidentListNew[ ,"nationality"], data = accidentListNew, main = "依國籍繪製的年齡盒鬚圖")
+boxplot(age ~ accidentListNew[ ,"nationality"], data = accidentListNew, main = "依國籍繪製的年齡盒鬚圖", horizontal = TRUE)
+```
+
+練習:針對年齡`age`依`woundType1`繪製盒鬚圖。
+
+```{r}
+# 針對年齡`age`依`woundType1`繪製盒鬚圖
+
+```
+
+利用`par(mfrow=c(m, n))`可以將畫布排版成`m x n`。
 
 ```{r}
 par(mfrow=c(3,2))
 boxPlots <- function(){
   variables <- names(accidentListNew[, c(-2, -5)])
   for (name in variables){
-    boxplot(年齡 ~ accidentListNew[ ,name], data=accidentListNew, main=paste('年齡依',name))
+    boxplot(age ~ accidentListNew[ ,name], data=accidentListNew, main=paste('年齡依',name))
   }
 }
 boxPlots()
-
-par(mfrow=c(1,1))
-boxplot(年齡 ~ accidentListNew[ ,"國籍別"], data=accidentListNew)
-```
-
-### 點圖dot plot
-
-單純的散佈圖形。
-
-```{r}
-par(mfrow=c(1,1))
-accidentListShort <- accidentListNew[accidentListNew$醫院所在縣市別=='桃園市' & !is.na(accidentListNew$年齡), ]
-accidentListShortOrder <- accidentListShort[order(accidentListShort$年齡), ]
-dotchart(accidentListShortOrder$年齡,labels=row.names(accidentListShortOrder),cex=.7, main="點圖依年齡", xlab="年齡")
 ```
 
 ### 圓餅pie chart
@@ -92,6 +120,8 @@ labels2 <- paste(names(table(accidentListNew$醫療檢傷)), "\n", percentage, "
 pie(slices, labels=labels2, col=rainbow(length(labels2)), main="醫療檢傷比例")
 ```
 
+專家不推薦Pie Chart!
+
 ### 散佈圖scatter plot
 
 * 將可能相關的兩組連續型變數畫在坐標圖上，檢驗成對的資料之間是否有相關性
@@ -100,6 +130,7 @@ pie(slices, labels=labels2, col=rainbow(length(labels2)), main="醫療檢傷比�
 
 ```{r}
 #From 1999 to 2009, US Dept. of Energy and Centers of Disease Control & Prevention
+par(mfrow=c(1,1))
 usCrudeOilFromNorway <- c(96, 110, 103, 127, 60, 54, 43, 36, 20, 11, 22)
 driverKilledInCollisionWithRailwayTrain <- c(76, 74, 76, 87, 66, 59, 63, 60, 55, 52, 46)
 plot(usCrudeOilFromNorway, driverKilledInCollisionWithRailwayTrain, main="Oil Import vs. Railway Kills", xlab="US Crude Oil Imported From Norway(in million barrels per year)", ylab="Driver Killed in Collision With Railway Train(in people per year)", pch=18, col="darkgreen", bg="darkgreen")
@@ -110,7 +141,7 @@ text(85, 65, paste("Correlation: ",correlation, "%", sep=""))
 
 ### 線圖line graph
 
-* 線圖其實就是散佈圖的延伸(plot+lines)
+* 線圖其實是散佈圖的延伸(plot+lines)
 
 ```{r}
 year <- c(1996, 1997,	1998,	1999,	2000,	2001,	2002,	2003,	2004,	2005,	2006,	2007,	2008,	2009,	2010,	2011,	2012,	2013,	2014)
@@ -119,7 +150,6 @@ plot(year, salaryReal, type="l", main=paste(" 歷年工業及服務業受僱員�
 points(year[1:4], salaryReal[1:4], col="blue", bg="blue", pch=15)
 points(year[5:12], salaryReal[5:12], col="darkgreen", bg="darkgreen", pch=16)
 points(year[13:length(year)], salaryReal[13:length(salaryReal)], col="blue", bg="blue", pch=17)
-legend("bottomright", pch=c(15, 16, 17), col=c("blue", "darkgreen", "blue"), c("李登輝", "陳水扁", "馬英九"), bty="o",  box.col="black", cex=.8)
 ```
 
 ### 調整圖形的重要參數
@@ -141,6 +171,7 @@ plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway, xlim=c(0,150)
 ```{r}
 par(mfrow=c(1,1))
 plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway)
+
 par(mfrow=c(1,2))
 plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway)
 plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway, xlim=c(0,150), ylim=c(0,100))
@@ -149,24 +180,23 @@ plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway, xlim=c(0,150)
 #### 圖例說明
 
 ```{r}
-Sys.setlocale(category = "LC_ALL", locale = "cht")
-nthyear <- c(5, 6,	7, 8,	1,	2,	3,	4,	5,	6,	7,	8,	1,	2,	3,	4,	5,	6,	7)
-salaryReal <- c(42520, 44195, 44798, 46040, 46605, 46716, 46330, 47058, 46989, 46447, 46521, 46650, 45038, 43193, 44989, 45508, 44726, 44446, 45494)
-presidents <- c("李登輝", "李登輝", "李登輝", "李登輝", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九")
-lineDataFrame <- data.frame(nthyear, salaryReal, presidents)
-library(reshape2)
-lineDataFrameCast <- dcast(lineDataFrame, nthyear~presidents, value.var = "salaryReal")
-par(mfrow=c(1,1))
-plot(lineDataFrameCast[, 2]~lineDataFrameCast[, 1], type="l", col="goldenrod", ylim=c(42000, 50000), lwd=2)
-lines(lineDataFrameCast[, 3], type="l", col="blue", lwd=2)
-lines(lineDataFrameCast[, 4], type="l", col="darkgreen", lwd=2)
-#legend("topright", legend=c("李登輝","馬英九","陳水扁"), col=c("goldenrod", "blue", "darkgreen"), lty=1, lwd=2)#會遮住線
-legend("top", legend=c("李登輝","馬英九","陳水扁"), ncol=3, cex=0.8, bty="n", col=c("goldenrod", "blue", "darkgreen"), lty=1, lwd=2)
+plot(year, salaryReal, type="l", main=paste(" 歷年工業及服務業受僱員工以100年價格衡量之實質薪資"), sub=paste("資料來源: 行政院主計總處","\n","https://www.dgbas.gov.tw/public/Attachment/5225164112198I9Y1K.pdf"),  lwd=1, xlab="", ylab="")
+points(year[1:4], salaryReal[1:4], col="blue", bg="blue", pch=15)
+points(year[5:12], salaryReal[5:12], col="darkgreen", bg="darkgreen", pch=16)
+points(year[13:length(year)], salaryReal[13:length(salaryReal)], col="blue", bg="blue", pch=17)
+legend("bottomright", pch=c(15, 16, 17), col=c("blue", "darkgreen", "blue"), c("李登輝", "陳水扁", "馬英九"), bty="o",  box.col="black", cex=.8)
 ```
 
 #### 點、線與長條的顏色
 
 在`plot()`中使用`col="#color"`來指定。
+
+```{r}
+par(mfrow=c(1,1))
+plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway)
+
+plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway, col = "red")
+```
 
 #### 背景顏色
 
@@ -199,21 +229,33 @@ col.main="darkgreen")
 * font=3: 斜體
 * font=4: 粗斜體
 
+```{r}
+par(family = "mono", font = 2, bg="white")
+plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway)
+```
+
 #### 選擇點的樣式與大小
 
 在`plot()`中使用`pch=#`與`cex=#`來選擇點的樣式與大小。
 
 ![點的樣式](image/pch.png)
 
+```{r}
+par(family = "sans", font = 1)
+plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway)
+plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway, pch = 18, cex = 2)
+```
+
 #### 線條的類型與寬度
 
-在`plot()`中使用`lty=#`與`lwd=#`來選擇線條的樣式與寬度。
+使用`lty=#`與`lwd=#`來選擇線條的樣式與寬度。
 
 ![線條的樣式](image/lty.png)
 
-#### 調整X軸或Y軸的數值間距與最大最小值
-
-在`plot()`中使用`xaxp=c(min, max, n)`與`yaxp=c(min, max, n)`來調整軸的數值間距與最大最小值。
+```{r}
+plot(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway)
+abline(lm(driverKilledInCollisionWithRailwayTrain~usCrudeOilFromNorway), col = "red", lwd = 2, lty = 2) #add regression line
+```
 
 ## Reference
 * R in Action, Robert I. Kabacoff
