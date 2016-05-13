@@ -3,7 +3,7 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_2
 
 ## ggplot2
 
-ggplot2是R最熱門的畫圖套件!
+ggplot2是R最熱門的畫圖套件之一。
 
 ```{r}
 install.packages("ggplot2")
@@ -16,9 +16,8 @@ library(ggplot2)
 setwd("C:/NTUTrainRL2")
 Sys.setlocale(category = "LC_ALL", locale = "cht")
 accidentList <- readRDS('data/accidentList.rds')
-colnames(accidentList) <- c("醫院所在縣市別", "醫院別", "性別", "國籍別", "年齡", "醫療檢傷", "救護檢傷")
 summary(accidentList)#看到一筆101歲的極端值，好像不太對
-accidentListNew <- subset(accidentList, 年齡!=101 | is.na(年齡))#使用一下subset()函數!
+accidentListNew <- subset(accidentList, age != 101)#使用一下subset()函數將101歲那筆資料刪除
 ```
 
 ### 長條圖bar plot
