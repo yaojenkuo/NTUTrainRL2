@@ -14,57 +14,71 @@ library(ggplot2)
 
 ```{r}
 setwd("C:/NTUTrainRL2")
-Sys.setlocale(category = "LC_ALL", locale = "cht")
 accidentList <- readRDS('data/accidentList.rds')
 summary(accidentList)#看到一筆101歲的極端值，好像不太對
-accidentListNew <- subset(accidentList, age != 101)#使用一下subset()函數將101歲那筆資料刪除
+accidentListNew <- subset(accidentList, age!=101)#使用subset()函數將年齡為101的資料剔除
 ```
 
 ### 長條圖bar plot
 
-以圖形高度代表資料量的統計圖形，主要用來處理離散型資料。
+以圖形高度代表資料量的統計圖形，主要用來處理離散型資料，使用`geom_bar()`。
+
+```{r}
+ggplot(accidentListNew, aes(x=county)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依醫院所在縣市別")
+```
+
+練習:針對國籍`nationality`繪製長條圖。
+
+```{r}
+# 針對國籍`nationality`繪製長條圖
+
+```
+
+想要將畫布排版必須藉助`grid`與`gridExtra`套件。
 
 ```{r}
 library(grid)
-p1 <- ggplot(accidentListNew, aes(x=醫院所在縣市別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依醫院所在縣市別")
-p2 <- ggplot(accidentListNew, aes(x=性別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依性別")
-p3 <- ggplot(accidentListNew, aes(x=國籍別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依國籍別")
-p4 <- ggplot(accidentListNew, aes(x=醫療檢傷)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依醫療檢傷別")
-p5 <- ggplot(accidentListNew, aes(x=救護檢傷)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依救護檢傷別")
-p6 <- ggplot(accidentListNew, aes(x=醫院別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依醫院別")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 library(gridExtra)
+p1 <- ggplot(accidentListNew, aes(x=county)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依醫院所在縣市別")
+p2 <- ggplot(accidentListNew, aes(x=gender)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依性別")
+p3 <- ggplot(accidentListNew, aes(x=nationality)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依國籍別")
+p4 <- ggplot(accidentListNew, aes(x=woundType1)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依醫療檢傷別")
+p5 <- ggplot(accidentListNew, aes(x=woundType2)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依救護檢傷別")
+p6 <- ggplot(accidentListNew, aes(x=hospital)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依醫院別")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 grid.arrange(p1, p2, p3, p4, p5, p6, ncol = 2)
 ```
 
 ### 直方圖histogram
 
-觀察連續型資料的分布。
+觀察連續型資料的分布，主要用來處理連續型資料，我們的資料集中只有一個連續型資料`age`，使用`geom_histogram()`。
 
 ```{r}
-ggplot(accidentListNew, aes(x=年齡))+geom_histogram(binwidth=3, fill="lightblue", colour="black")+ggtitle("八仙傷亡年齡直方圖")+ylab("頻率")
+ggplot(accidentListNew, aes(x=age))+geom_histogram(fill="lightblue", colour="black", binwidth = 3)+ggtitle("八仙傷亡年齡直方圖")+ylab("頻率")
+```
+
+也可以設定為y軸為密度，加入`..density..`參數:
+
+```{r}
+ggplot(accidentListNew, aes(x=age, ..density..))+geom_histogram(fill="lightblue", colour="black")+ggtitle("八仙傷亡年齡直方圖")+ylab("密度")
 ```
 
 ### 盒鬚圖boxplot
 
-顯示數據分布情況包含最大值、最小值、中位數、下四分位數及上四分位數。
+與直方圖功能類似，可以顯示數據分布情況包含最大值、最小值、中位數、下四分位數及上四分位數，但是可以用類別變數區隔，顯示數值在不同類別中的分布情況。
 
 ```{r}
-p1 <- ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")
-p2 <- ggplot(accidentListNew, aes(x=性別, y=年齡)) + geom_boxplot()+ggtitle("年齡依性別")
-p3 <- ggplot(accidentListNew, aes(x=國籍別, y=年齡)) + geom_boxplot()+ggtitle("年齡依國籍別")
-p4 <- ggplot(accidentListNew, aes(x=醫療檢傷, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫療檢傷別")
-p5 <- ggplot(accidentListNew, aes(x=救護檢傷, y=年齡)) + geom_boxplot()+ggtitle("年齡依救護檢傷別")
-grid.arrange(p1, p2, p3, p4, p5, ncol = 2)
+ggplot(accidentListNew, aes(x=nationality, y=age)) + geom_boxplot()+ggtitle("年齡依國籍別")
 ```
 
-### 點圖dot plot
-
-單純的散佈圖形。
+想要將畫布排版必須藉助`grid`與`gridExtra`套件。
 
 ```{r}
-accidentListShort <- accidentListNew[accidentListNew$醫院所在縣市別=='桃園市' & !is.na(accidentListNew$年齡), ]
-accidentListShortOrder <- accidentListShort[order(accidentListShort$年齡), ]
-ggplot(accidentListShortOrder, aes(x = 年齡, y=reorder(row.names(accidentListShortOrder), 年齡))) + geom_point(size=3)+ylab("編號")+ggtitle("點圖依年齡")
+p1 <- ggplot(accidentListNew, aes(x=county, y=age)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")
+p2 <- ggplot(accidentListNew, aes(x=gender, y=age)) + geom_boxplot()+ggtitle("年齡依性別")
+p3 <- ggplot(accidentListNew, aes(x=nationality, y=age)) + geom_boxplot()+ggtitle("年齡依國籍別")
+p4 <- ggplot(accidentListNew, aes(x=woundType1, y=age)) + geom_boxplot()+ggtitle("年齡依醫療檢傷別")
+p5 <- ggplot(accidentListNew, aes(x=woundType2, y=age)) + geom_boxplot()+ggtitle("年齡依救護檢傷別")
+grid.arrange(p1, p2, p3, p4, p5, ncol = 2)
 ```
 
 ### 圓餅pie chart
@@ -80,6 +94,8 @@ ymin <- c(0, head(ymax, n=-1))
 donutData <- data.frame(labels, percentage, ymax, ymin)
 ggplot(donutData) + geom_rect(aes(fill=labels, ymax=ymax, ymin=ymin, xmax=4, xmin=3)) + coord_polar(theta="y") + xlim(c(0, 4))
 ```
+
+專家不推薦圓餅圖!
 
 ### 散佈圖scatter plot
 
