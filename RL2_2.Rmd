@@ -86,8 +86,8 @@ grid.arrange(p1, p2, p3, p4, p5, ncol = 2)
 圓餅圖是呈現組成比例的圖形。
 
 ```{r}
-slices <- as.vector(table(accidentListNew$醫療檢傷))#把table轉為向量
-labels <- names(table(accidentListNew$醫療檢傷))
+slices <- as.vector(table(accidentListNew$woundType1))#把table轉為向量
+labels <- names(table(accidentListNew$woundType1))
 percentage <- round(slices/sum(slices), 3)
 ymax <- cumsum(percentage)
 ymin <- c(0, head(ymax, n=-1))
@@ -131,8 +131,10 @@ ggplot(lineGraphData, aes(x=year, y=salaryReal)) + geom_line() + geom_point(size
 nthyear <- c(5, 6,  7, 8,	1,	2,	3,	4,	5,	6,	7,	8,	1,	2,	3,	4,	5,	6,	7)
 presidents <- c("李登輝", "李登輝", "李登輝", "李登輝", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "陳水扁", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九", "馬英九")
 lineGraphData <- data.frame(nthyear, salaryReal, presidents)
-ggplot(lineGraphData, aes(x=nthyear, y=salaryReal, colour=presidents))+geom_line(lwd=2)+geom_point(size=4)#automatically assign colors
-ggplot(lineGraphData, aes(x=nthyear, y=salaryReal, colour=presidents))+geom_line(lwd=2)+geom_point(size=4)+scale_colour_manual(values = c("李登輝" = "goldenrod", "陳水扁" = "darkgreen", "馬英九" = "blue"))#custom colors
+
+ggplot(lineGraphData, aes(x=nthyear, y=salaryReal, colour=presidents))+geom_line(lwd=1)+geom_point(size=3)#automatically assign colors
+
+ggplot(lineGraphData, aes(x=nthyear, y=salaryReal, colour=presidents))+geom_line(lwd=1)+geom_point(size=3)+scale_colour_manual(values = c("李登輝" = "goldenrod", "陳水扁" = "darkgreen", "馬英九" = "blue"))#custom colors
 ```
 
 ### 調整圖形的重要參數
@@ -150,18 +152,22 @@ ggplot(lineGraphData, aes(x=year, y=salaryReal)) + geom_line() + geom_point(size
 使用`+coord_flip()`翻轉X軸與Y軸。
 
 ```{r}
-ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+coord_flip()
+ggplot(accidentListNew, aes(x=county, y=age)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+coord_flip()
 ```
 
 使用`+xlim()`與`+ylim()`更改坐標軸值域。
 
 ```{r}
-ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+ylim(0, 50)
+ggplot(accidentListNew, aes(x=county, y=age)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+ylim(0, 50)
 ```
 
 #### 設定標題
 
 使用`+ggtitle("title")`來設定標題。
+
+```{r}
+ggplot(accidentListNew, aes(x=county, y=age)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")
+```
 
 #### 隱藏格線
 
@@ -170,7 +176,7 @@ ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()
 * 使用`+theme(panel.grid.major.y=element_blank(), panel.grid.minor.y=element_blank())`隱藏全部Y格線
 
 ```{r}
-ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank())
+ggplot(accidentListNew, aes(x=county, y=age)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank())
 ```
 
 #### 改變背景顏色
@@ -178,7 +184,7 @@ ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()
 使用`+theme_bw()`更改為白色，`+theme_grey()`更改為預設。
 
 ```{r}
-ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+theme_bw()+theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank())
+ggplot(accidentListNew, aes(x=county, y=age)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+theme_bw()+theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank())
 ```
 
 #### 圖例
@@ -186,14 +192,15 @@ ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡)) + geom_boxplot()
 使用`+guides(fill=FALSE)`移除圖例。
 
 ```{r}
-ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡, fill=醫院所在縣市別)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")
-ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡, fill=醫院所在縣市別)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+guides(fill=FALSE)
+ggplot(accidentListNew, aes(x=county, y=age, fill=county)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")#預設有圖例
+
+ggplot(accidentListNew, aes(x=county, y=age, fill=county)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+guides(fill=FALSE)#移除圖例
 ```
 
 使用`+theme(legend.position="#position")`來指定圖例位置。
 
 ```{r}
-ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡, fill=醫院所在縣市別)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+theme(legend.position="top")
+ggplot(accidentListNew, aes(x=county, y=age, fill=county)) + geom_boxplot()+ggtitle("年齡依醫院所在縣市別")+theme(legend.position="top")
 ```
 
 #### Facets
@@ -201,9 +208,11 @@ ggplot(accidentListNew, aes(x=醫院所在縣市別, y=年齡, fill=醫院所在
 使用`facet_grid()`做交叉圖形。
 
 ```{r}
-ggplot(accidentListNew, aes(x=性別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依性別")+facet_grid(. ~醫療檢傷)#1*n
-ggplot(accidentListNew, aes(x=性別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依性別")+facet_grid(醫療檢傷~.)#m*1
-ggplot(accidentListNew, aes(x=性別)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("依性別")+facet_grid(醫療檢傷~救護檢傷)#m*n
+ggplot(accidentListNew, aes(x=gender)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("性別依醫療檢傷")+facet_grid(. ~woundType1)#1*n
+
+ggplot(accidentListNew, aes(x=gender)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("性別依醫療檢傷")+facet_grid(woundType1~.)#m*1
+
+ggplot(accidentListNew, aes(x=gender)) + geom_bar(fill="lightblue", colour="black")+ylab("人數")+ggtitle("性別依醫療檢傷x救護檢傷")+facet_grid(woundType1~woundType2)#m*n
 ```
 
 #### 顏色
@@ -212,7 +221,7 @@ ggplot(accidentListNew, aes(x=性別)) + geom_bar(fill="lightblue", colour="blac
 
 ```{r}
 ggplot(scatterPlotData, aes(x=usCrudeOilFromNorway, y=driverKilledInCollisionWithRailwayTrain)) + geom_point(colour="red", size=4)
-ggplot(accidentListNew, aes(x=年齡))+geom_histogram(binwidth=3, fill="red", colour="black")+ggtitle("八仙傷亡年齡直方圖")+ylab("頻率")
+ggplot(accidentListNew, aes(x=age))+geom_histogram(binwidth=3, fill="red", colour="black")+ggtitle("八仙傷亡年齡直方圖")+ylab("頻率")
 ```
 
 ### 其他的ggplot2圖形
@@ -242,8 +251,7 @@ ggplot(dummyDF, aes(x=xaxis))+stat_function(fun=customFunction)
 
 ```{r}
 presidentsRating <- readRDS('data/presidentsRating.rds')
-ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_raster() + #More efficient
-#ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_tile()
+ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_raster()
 ```
 
 使用`scale_#_continuous(breaks=...)`、`scale_#_reverse()`與`scale_fill_gradient2(...)`分別指定坐標軸的刻度、是否反轉與自訂顏色。
@@ -257,6 +265,7 @@ ggplot(presidentsRating, aes(x=year, y=quarter, fill=rating)) + geom_raster() + 
 馬賽克圖Mosaic Plot from vcd，使用於視覺化類別型變數，觀察比例與組成。
 
 ```{r}
+install.packages("vcd")
 library(vcd)
 mosaic(HairEyeColor, shade=TRUE, legend=FALSE)#用一個table的示範資料集
 ```
