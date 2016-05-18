@@ -1,0 +1,126 @@
+---
+title: "Learning R and Data Science for RL2"
+author: "Yao-Jen Kuo"
+output: slidy_presentation
+---
+
+## 簡單自我介紹
+
+- https://yaojenkuo.github.com
+- tonykuoyj@gmail.com
+
+## 系統訓練班
+
+- 門禁卡收200元押金
+- 今天上完課就得決定是否退費
+- 開車的同學記得找講師蓋停車章可以半價優惠
+- 加入社團跟同學認識、交流
+
+## 對資料科學的淺見
+
+- 把問題定義清楚
+- 找資料(專題一)
+- 整理資料(專題一)
+- 視覺化探勘(專題二)
+- 建模型(專題三)
+- 視覺化呈現(專題二)
+
+## 開卷有益
+
+- [R in Action](https://www.manning.com/books/r-in-action-second-edition)
+
+![R in Action](image/rInAction.jpg)
+
+- [The Art of R Programming](http://www.amazon.com/The-Art-Programming-Statistical-Software/dp/1593273843)
+
+![The Art of R Programming](image/The-Art-of-R-Programming-Matloff-Norman.jpg)
+
+## 其他學習管道
+
+- Data Camp
+- swirl套件
+- Coursera
+- R-blogger
+- GitHub
+- Stackoverflow
+
+![這我最會](image/stackoverflowfunny.jpg)
+
+## 安裝開發環境
+
+- [R-core](https://cran.r-project.org/)
+- [RStudio](https://www.rstudio.com/products/rstudio/download/)
+- https://github.com/yaojenkuo/RGettingStarted/blob/master/R_Installation.md
+
+## R語言強項有
+
+- Free!
+- 每隔幾天就有新的套件!
+- End-to-end資料分析軟體，什麼都會
+- 很多connector
+- 在Windows、Mac與Linux平台都可以運作
+- 有個很棒的IDE:RStudio
+
+## R語言可以做哪些事
+
+- 蒐集資料
+    - 從檔案
+    - 從網路
+- 整理資料
+- 視覺化
+- 建模型
+- 做Presentation
+
+## 視覺化
+
+- Basic Plotting System
+- ggplot2
+- Plotly
+- Leaflet
+- Shiny
+
+## Basic Plotting System
+
+```{r}
+counts <- table(mtcars$gear)
+barplot(counts, main="Basic Plotting System", horiz=TRUE, names.arg=c("3 Gears", "4 Gears", "5 Gears"))
+```
+
+## ggplot2
+
+```{r}
+library(ggplot2)
+ggplot(mtcars, aes(factor(gear)))+geom_bar()+coord_flip()
+```
+
+## Plotly
+
+```{r, message=FALSE}
+library(plotly)
+countsDF <- data.frame(counts)
+plot_ly(countsDF, x=Freq, y=Var1, type="bar", orientation="h")
+```
+
+## Leaflet
+
+```{r}
+library(leaflet)
+helloMap <- leaflet() %>%
+  addTiles() %>% #把預設的地圖圖層加入
+  addMarkers(lng=121.539366, lat=25.017326, popup="National Taiwan University")
+helloMap
+```
+
+## Shiny
+
+- https://yaojenkuo.shinyapps.io/quakesTW/
+
+## 做Presentation
+
+- ioslides
+- Slidy
+
+## 講義
+
+- [新手上路](https://github.com/yaojenkuo/RGettingStarted)
+- [R語言玩資料視覺化](https://github.com/yaojenkuo/NTUTrainRL2)
