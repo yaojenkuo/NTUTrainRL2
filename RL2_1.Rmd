@@ -1,17 +1,6 @@
 # NTUTrainRL2_1
 This is the lecture notes for NTU Train Course of R Project Lecture 2_1
 
-## Introduction
-
-在這門課程裡面我們會介紹以下幾種畫圖/Presentation的功能:
-
-- R Base Plotting System
-- ggplot2
-- leaflet for R
-- R Markdown
-- Plotly
-- Shiny
-
 ## R Base Plotting System
 
 不需要額外安裝套件就可以畫圖。
@@ -22,7 +11,7 @@ This is the lecture notes for NTU Train Course of R Project Lecture 2_1
 setwd("C:/NTUTrainRL2")
 accidentList <- readRDS('data/accidentList.rds')
 summary(accidentList)#看到一筆101歲的極端值，好像不太對
-accidentListNew <- subset(accidentList, age!=101)#使用subset()函數將年齡為101的資料剔除
+accidentListNew <- subset(accidentList, age!=101)#使用subset()函數將年齡為101與NA的資料剔除
 ```
 
 ### 長條圖bar plot
@@ -119,7 +108,7 @@ labels2 <- paste(names(table(accidentListNew$醫療檢傷)), "\n", percentage, "
 pie(slices, labels=labels2, col=rainbow(length(labels2)), main="醫療檢傷比例")
 ```
 
-專家不推薦圓餅圖!
+視覺化分析專家其實多半都不推薦圓餅圖!
 
 ### 散佈圖scatter plot
 
