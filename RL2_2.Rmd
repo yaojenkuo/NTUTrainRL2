@@ -16,7 +16,7 @@ library(ggplot2)
 setwd("C:/NTUTrainRL2")
 accidentList <- readRDS('data/accidentList.rds')
 summary(accidentList)#看到一筆101歲的極端值，好像不太對
-accidentListNew <- subset(accidentList, age!=101)#使用subset()函數將年齡為101的資料剔除
+accidentListNew <- subset(accidentList, age!=101)#使用subset()函數將年齡為101與NA的資料剔除
 ```
 
 ### 長條圖bar plot
@@ -53,7 +53,7 @@ grid.arrange(p1, p2, p3, p4, p5, p6, ncol = 2)
 觀察連續型資料的分布，主要用來處理連續型資料，我們的資料集中只有一個連續型資料`age`，使用`geom_histogram()`。
 
 ```{r}
-ggplot(accidentListNew, aes(x=age))+geom_histogram(fill="lightblue", colour="black", binwidth = 3)+ggtitle("八仙傷亡年齡直方圖")+ylab("頻率")
+ggplot(accidentListNew, aes(x=age))+geom_histogram(fill="lightblue", colour="black")+ggtitle("八仙傷亡年齡直方圖")+ylab("頻率")
 ```
 
 也可以設定為y軸為密度，加入`..density..`參數:
@@ -95,7 +95,7 @@ donutData <- data.frame(labels, percentage, ymax, ymin)
 ggplot(donutData) + geom_rect(aes(fill=labels, ymax=ymax, ymin=ymin, xmax=4, xmin=3)) + coord_polar(theta="y") + xlim(c(0, 4))
 ```
 
-專家不推薦圓餅圖!
+視覺化分析專家其實多半都不推薦圓餅圖!
 
 ### 散佈圖scatter plot
 
