@@ -99,12 +99,12 @@ boxPlots()
 圓餅圖是呈現組成比例的圖形。
 
 ```{r}
-slices <- as.vector(table(accidentListNew$醫療檢傷))#把table轉為向量
-labels <- paste(names(table(accidentListNew$醫療檢傷)), "\n", slices, "人", sep="")#table就是有名字的向量
+slices <- as.vector(table(accidentListNew$woundType1))#把table轉為向量
+labels <- paste(names(table(accidentListNew$woundType1)), "\n", slices, "人", sep="")#table就是有名字的向量
 pie(slices, labels = labels, main="醫療檢傷人數")
 
 percentage <- round(slices/sum(slices)*100)
-labels2 <- paste(names(table(accidentListNew$醫療檢傷)), "\n", percentage, "%", sep="")
+labels2 <- paste(names(table(accidentListNew$woundType1)), "\n", percentage, "%", sep="")
 pie(slices, labels=labels2, col=rainbow(length(labels2)), main="醫療檢傷比例")
 ```
 
