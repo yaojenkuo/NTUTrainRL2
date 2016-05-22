@@ -2,37 +2,38 @@
 
 ## 請列出我們會教的5種繪圖套件
 
-*
+* Basic Plotting System
 
-*
+* ggplot2
 
-*
+* Plotly
 
-*
+* Leaflet
 
-*
+* Shiny
 
 ## 簡單描述這5個套件的特性
 
-*
+* 不需安裝套件
 
-*
+* 需要額外安裝, 畫靜態圖表
 
-*
+* 具有簡單互動性的圖表工具
 
-*
+* 具有互動geo visualization套件
 
-*
+* 讓R使用者可以寫R程式做網頁
 
 ## 指定絕對路徑將accidentList.rds載入R的工作環境
 
 ```{r}
-path <- "___"#替換雙引號中的___為檔案的絕對路徑
+path <- "C:/NTUTrainRL2/data/accidentList.rds"#替換雙引號中的___為檔案的絕對路徑
 accidentList <- readRDS(path)
 # 查詢`summary`函數
-
+?summary
+help(summary)
 # 對`accidentList`使用`summary`函數
-
+summary(accidentList)
 ```
 
 ## 重新觀察新的資料框
@@ -40,9 +41,10 @@ accidentList <- readRDS(path)
 ```{r}
 accidentListNew <- subset(accidentList, age!=101)
 # 對`accidentListNew`使用`summary`函數
-
+summary(accidentListNew)
 # 查詢`str`函數
-
+?str
+help(str)
 # 對`accidentListNew`使用`str`函數
-
+str(accidentListNew)
 ```
