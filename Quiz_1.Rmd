@@ -1,0 +1,40 @@
+# Quiz 1
+
+## 請列出我們會教的5種繪圖套件
+
+- 
+- 
+- 
+- 
+- 
+
+## 簡單描述這5個套件的特性
+
+- 
+- 
+- 
+- 
+- 
+
+## 指定絕對路徑將accidentList.rds載入R的工作環境
+
+```{r}
+path <- "___"#替換雙引號中的___為檔案的絕對路徑
+accidentList <- readRDS(path)
+# 查詢`summary`函數
+
+# 對`accidentList`使用`summary`函數
+
+```
+
+## 重新觀察新的資料框
+
+```{r}
+accidentListNew <- subset(accidentList, age!=101)
+# 對`accidentListNew`使用`summary`函數
+
+# 查詢`str`函數
+
+# 對`accidentListNew`使用`str`函數
+
+```
