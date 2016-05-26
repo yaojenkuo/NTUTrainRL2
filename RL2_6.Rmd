@@ -562,7 +562,7 @@ Shinyapps.io自動會幫每個帳號產生一組token與secret，用來告訴rsc
 
 ![Tokens](image/shiny01.png)
 
-![Tokens](image/shiny01.png)
+![Tokens](image/shiny02.png)
 
 * 在Rstudio的Console執行這段程式就完成了，三個參數都要填入在Tokens畫面點選Show之後顯示的資訊。
 
@@ -570,11 +570,9 @@ Shinyapps.io自動會幫每個帳號產生一組token與secret，用來告訴rsc
 rsconnect::setAccountInfo(name='yaojenkuo', token='C78DF668EE134F538EC050A2DA6CEDA7', secret='9JpGahAHVlmIRP1CYp9wApTCB/YFckvcMnsgefrC')
 ```
 
-使用`runApp()`來執行wsjIndia App然後點選Publish。
+點選編輯區右上角的Publish。
 
-```{r}
-runApp("wsjIndia")
-```
+![Publish](image/shiny03.png)
 
 ## Reference
 * [Shiny](http://shiny.rstudio.com/)
