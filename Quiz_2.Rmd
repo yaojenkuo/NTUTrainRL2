@@ -7,10 +7,10 @@
 
 
 # 利用`setwd()`將工作環境先指定到C:/NTUTrainRL2
-setwd("/Users/tkuo/ntu_train/NTUTrainRL2/data")
+
 
 # 指定相對路徑將置放於data資料夾中的accidentList.csv讀入
-accidentList <- read.csv("accidentList.csv")
+accidentList <- read.csv()
 summary(accidentList)
 accidentListNew <- accidentList[complete.cases(accidentList), ]
 ```
