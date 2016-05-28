@@ -1,16 +1,17 @@
 # Quiz 2
 
-## 將csv檔載入Ｒ工作環境
+## 將csv檔載入R工作環境
 
 ```{r}
 # 查詢`read.csv`函數
-
+?read.csv
+help(read.csv)
 
 # 利用`setwd()`將工作環境先指定到C:/NTUTrainRL2
-
+setwd("C:/NTUTrainRL2")
 
 # 指定相對路徑將置放於data資料夾中的accidentList.csv讀入
-accidentList <- read.csv()
+accidentList <- read.csv("data/accidentList.csv")
 summary(accidentList)
 accidentListNew <- accidentList[complete.cases(accidentList), ]
 ```
@@ -21,7 +22,7 @@ accidentListNew <- accidentList[complete.cases(accidentList), ]
 ?barplot
 
 # 使用`barplot`函數
-barplot()
+barplot(table(accidentListNew$woundType1), main = "barplot for woundType1", xlab = "woundType1", ylab = "frequency")
 ```
 
 ## 利用Base Plotting System對age畫直方圖, 至少要包含標題, X軸標籤與Y軸標籤
@@ -30,7 +31,7 @@ barplot()
 ?hist
 
 # 使用`hist`函數
-hist()
+hist(accidentListNew$age, main = "histogram for age", xlab = "age", ylab = "frequency")
 ```
 
 ## 利用Base Plotting System對age畫盒鬚圖, 至少要包含標題, X軸標籤與Y軸標籤
@@ -39,27 +40,29 @@ hist()
 ?boxplot
 
 # 使用`boxplot`函數
-boxplot()
+boxplot(accidentListNew$age)
+boxplot(accidentListNew$age ~ accidentListNew$woundType1, main = "boxplot for age by woundType1", xlab= "woundType1", ylab = "distribution")
 ```
 
 ## 利用ggplot2針對任意類別型變數畫長條圖, 至少要包含標題, X軸標籤與Y軸標籤
 ```{r}
 # 利用`install.packages`安裝ggplot2
-
+install.packages("ggplot2")
 # 利用`library`載入ggplot2
-
+library(ggplot2)
 # 作圖
-ggplot() + geom_bar() + 
+ggplot(accidentListNew, aes(x=woundType1)) + geom_bar() + ggtitle("barplot for woundType1") + xlab("woundType1") + ylab("frequency")
 ```
 
 ## 利用ggplot2對age畫直方圖, 至少要包含標題, X軸標籤與Y軸標籤
 ```{r}
 # 作圖
-ggplot() + geom_histogram() + 
+ggplot(accidentListNew, aes(x=age)) + geom_histogram() + ggtitle("histogram for age") + xlab("age") + ylab("frequency")
 ```
 
 ## 利用ggplot2對age畫盒鬚圖, 至少要包含標題, X軸標籤與Y軸標籤
 ```{r}
 # 作圖
-ggplot() + geom_boxplot() + 
+ggplot(accidentListNew, aes(x=1, y=age)) + geom_boxplot()
+ggplot(accidentListNew, aes(x=woundType1, y=age)) + geom_boxplot() + ggtitle("boxplot for age by woundType1") + xlab("woundType1") + ylab("distribution")
 ```
