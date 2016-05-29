@@ -153,7 +153,7 @@ rectangleOnMap
 
 ```{r}
 topoData <- readLines("C:/NTUTrainRL2/data/us-10m.json", warn=FALSE) %>% paste(collapse = "\n")
-leaflet() %>% setView(lng = -98.583, lat = 39.833, zoom = 2) %>%
+leaflet() %>% setView(lng = -98.583, lat = 39.833, zoom = 3) %>%
   addTiles() %>%
   addTopoJSON(topoData, weight = 1, color = "#444444", fill = FALSE)
 ```
@@ -169,7 +169,9 @@ library(rgdal)#取得readORG function
 countries <- readOGR("C:/NTUTrainRL2/data/countries.geojson", "OGRGeoJSON")
 ```
 
-使用連續型變數**人口(pop_est)**作為著色的根據，我們使用`colorNumeric()`並參照(COLOR BREWER 2.0)[http://colorbrewer2.org/]與來畫出我們的調色盤。
+使用連續型變數**人口(pop_est)**作為著色的根據，我們使用`colorNumeric()`並參照(COLOR BREWER 2.0)[http://colorbrewer2.org/]或者
+![r color sheet](image/rcolorsheet.png)
+來畫出我們的調色盤。
 
 ```{r}
 numericPalette <- colorNumeric(palette="Greens", domain=countries$pop_est)
